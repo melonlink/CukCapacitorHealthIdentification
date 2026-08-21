@@ -1,0 +1,18 @@
+# MATLAB generated files
+*.asv
+*.autosave
+*.slxc
+*.mexw64
+*.mexa64
+*.mexmaci64
+slprj/
+codegen/
+*.log
+
+# Large reproducible verification workspaces stay local. Source, CSV tables,
+# PNG/FIG plots and Simulink models are versioned; run_all.m rebuilds MAT files.
+cuk_cap_health_verification/results/**/*.mat
+
+# Local caches and temporary data
+.cache/
+*.tmp
