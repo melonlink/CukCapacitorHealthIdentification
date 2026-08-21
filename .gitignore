@@ -12,6 +12,7 @@ codegen/
 # Large reproducible verification workspaces stay local. Source, CSV tables,
 # PNG/FIG plots and Simulink models are versioned; run_all.m rebuilds MAT files.
 cuk_cap_health_verification/results/**/*.mat
+verification_v2/results/**/*.mat
 
 # Local caches and temporary data
 .cache/

@@ -1,0 +1,5 @@
+case_name,ESL_nH,opposed_channel_delay_ns,jitter_rms_ns,pre_projection_C_F,pre_projection_ESR_Ohm,C_est_F,C_MAPE_percent,ESR_est_Ohm,ESR_MAPE_percent,edge_gate_accept_fraction,NIS_R_median,status,notes
+nominal_1nH,1,0,0,8e-05,0.035,9.99988112047975e-05,0.00118879520247805,0.0500305692842619,0.0611385685237442,1,0.00453506224832404,PASS,physical Simscape ESL and timestamped measurement
+delay_200ns,1,200,0,8e-05,0.035,9.99616186156031e-05,0.0383813843968683,0.047877962731526,4.24407453694793,1,0.00482028694110568,PASS,physical Simscape ESL and timestamped measurement
+ESL20_delay200_jitter20,20,200,20,8e-05,0.035,9.99616246317906e-05,0.0383753682094423,0.0478715118551504,4.25697628969922,1,0.0181893820411993,PASS,physical Simscape ESL and timestamped measurement
+ESL20_delay500_jitter50,20,500,50,8e-05,0.035,0.000100250840858552,0.25084085855227,0.0444876996805531,11.0246006388938,1,0.170469209312267,FAIL,physical Simscape ESL and timestamped measurement
