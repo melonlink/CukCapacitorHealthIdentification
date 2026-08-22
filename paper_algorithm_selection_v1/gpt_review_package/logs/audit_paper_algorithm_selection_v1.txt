@@ -1,0 +1,13 @@
+PAPER ALGORITHM SELECTION V1 AUDIT
+timestamp=2026-08-22 13:38:33
+static_rows=6
+abrupt_rows=18
+ramp_rows=162
+threshold_rows=360
+transient_rows=24
+noise_timing_rows=48
+bootstrap_rows=7
+trace_rows=4812
+frozen_core_sha256=6B59445898F224C6C070B4E0C3B08E73C7500B5385F912BB058BADBC6AD67225
+final_decision=DUAL_REALIZATION
+AUDIT=PASS
