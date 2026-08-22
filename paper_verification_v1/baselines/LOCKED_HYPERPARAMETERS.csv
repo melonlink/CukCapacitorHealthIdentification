@@ -1,0 +1,21 @@
+algorithm,parameter,value,unit,selection_source,locked_before_blind
+B0,aggregation,median,category,training robustness sweep,true
+B0,min_excitation,0.05,normalized,training set,true
+B1,forgetting_factor,0.9975,1,training grid,true
+B1,P0_scale,1000,1,training grid,true
+B1,C_projection,[0.65 1.35],C0 factor,protocol,true
+B1,R_projection,[0.35 2.50],R0 factor,protocol,true
+B2,Q_v,2.5e-5,V2/update,training grid,true
+B2,Q_C,1e-10,F2/update,training grid,true
+B2,Q_R,2.5e-8,ohm2/update,training grid,true
+B2,R_v,2.5e-5,V2,training grid,true
+B3,Q_state,2.5e-5,V2/update,training grid,true
+B3,Q_parameter,diag([2e-10 5e-8]),mixed,training grid,true
+B3,R_state,2.5e-5,V2,training grid,true
+B4,haar_level,1,level,public-method adaptation,true
+B4,KF_Q,diag([4e-8 8e-8]),normalized,training grid,true
+B4,KF_R,diag([2e-4 3e-4]),normalized,training grid,true
+TS-SLTVKE,multi_cycle_window,1024,cycles,frozen v2.1 baseline,true
+TS-SLTVKE,NIS_gate,9.0,1,frozen v2.1 baseline,true
+TS-SLTVKE,C_projection,[0.65 1.35],C0 factor,frozen v2.1 baseline,true
+TS-SLTVKE,R_projection,[0.35 2.50],R0 factor,frozen v2.1 baseline,true

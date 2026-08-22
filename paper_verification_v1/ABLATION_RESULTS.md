@@ -1,0 +1,5 @@
+# Ablation results
+
+A0-A6 were executed in the mandated order over seven scenarios and 40 deterministic Monte Carlo repetitions per scenario. Mean C MAPE changed from 0.394% (A0) to 0.170% (A6); mean ESR MAPE changed from 3.807% to 3.101%. Joint 95% coverage changed from 0.168 to 0.989.
+
+Timestamp reconstruction (A0 to A1) provides the clearest ESR gain and A1 has the lowest aggregate static ESR error. A2 and A3 show negative aggregate gains in this dataset; therefore charge-domain and structured updates are not claimed to improve every static metric. A4 leaves point estimates almost unchanged but restores confidence consistency by removing same-sample reuse. The 1024-cycle A5 stage gives the lowest C error while exposing uncalibrated ESR bias; A6 recovers part of that ESR loss and raises joint CI coverage through calibration, NIS gating, projection, locked covariance, and low-excitation freeze. Full A6 is justified as a guarded physical estimator, not as the static-accuracy optimum. All negative gains are retained.

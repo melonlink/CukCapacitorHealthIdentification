@@ -1,0 +1,10 @@
+PAPER VERIFICATION V1 AUDIT: PASS
+literature_rows=25
+blind_cases=48
+modelB_anchors=45
+blind_algorithm_rows=4608
+algorithms=B0 Closed-form;B1 RLS;B2 Augmented EKF;B3 Dual EKF;B4 Cuk-adapted wavelet-KF;TS-SLTVKE
+ablation_rows=49
+pe_rows=36
+figures=12
+decision=PAPER_READY_WITH_MINOR_GAPS

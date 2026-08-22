@@ -1,0 +1,7 @@
+algorithm,state_dimension,max_matrix_inversion_dimension,scalar_divisions_per_update,multiplications_per_update,additions_per_update,memory_scalars,samples_per_cycle,nominal_latency_cycles,estimated_execution_us_F28379D
+B0 Closed-form,0,0,2,8,6,12,6,1,0.42
+B1 RLS,2,1,1,28,20,22,6,64,1.36
+B2 Augmented EKF,3,1,1,74,58,46,6,128,3.72
+B3 Dual EKF,3,1,2,62,47,40,6,96,3.05
+B4 Cuk-adapted wavelet-KF,2,1,2,48,35,34,6,64,2.48
+TS-SLTVKE,3,1,1,46,34,31,6,32,2.12
