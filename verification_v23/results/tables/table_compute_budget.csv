@@ -1,0 +1,7 @@
+stage,budgetUs,cyclesAt200MHz,deadlineUs,pass,evidence
+DMA complete,4.5,900,20,1,Static worst-case allocation; target profiling required
+feature extraction,3,600,20,1,Static worst-case allocation; target profiling required
+TS-SLTVKE step,5,1000,20,1,Static worst-case allocation; target profiling required
+diagnostics,1.5,300,20,1,Static worst-case allocation; target profiling required
+reserved margin,6,1200,20,1,Static worst-case allocation; target profiling required
+total,20,4000,20,1,14 us allocated plus 6 us reserve equals 20 us deadline

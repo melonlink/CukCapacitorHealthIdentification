@@ -1,0 +1,5 @@
+operatingCase,plantMinV,plantMaxV,adcPinCommonV,datasheetToleranceV,directConnectionPass,afeTranslatedPass
+low_CCM,-19.9327958955969,19.9373234638082,1.25,0.05,0,1
+nominal,-19.9071753981501,19.9554677960592,1.25,0.05,0,1
+high_load,-19.8923926402717,20.0112183825907,1.25,0.05,0,1
+high_D,-34.3427620867934,34.6982187606699,1.25,0.05,0,1

@@ -1,0 +1,14 @@
+item,value,source,status
+ADC modules,"4",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+16-bit input mode,"Differential only",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+ADCCLK,"50 MHz (5 to 50 MHz allowed)",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+minimum acquisition window,"320 ns",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+conversion time,"119 SYSCLK = 595 ns",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+result latency,"120 SYSCLK = 600 ns",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+typical ENOB,"14.65 bits",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+CMRR,"60 dB, DC to 1 MHz",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+synchronous ADC isolation,"+/-2 LSB",SPRS880P Table 6-47/6-48,SOURCE_VERIFIED
+input switch resistance,"700 ohm",SPRS880P Figure 6-34,SOURCE_VERIFIED
+sample capacitor,"16.5 pF",SPRS880P Figure 6-34,SOURCE_VERIFIED
+reference,"External 2.5 V; 22 uF per reference pair",SPRS880P Section 6.12.1.1,SOURCE_VERIFIED
+silicon revision,"C",SPRZ412N revision table,SOURCE_VERIFIED

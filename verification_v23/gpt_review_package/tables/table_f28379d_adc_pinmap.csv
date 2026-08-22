@@ -1,0 +1,5 @@
+adc,positive,negative,ptpPositive,ptpNegative,zwtPositive,zwtNegative,vrefHighPtp,vrefLowPtp,selected,reason
+ADCA,ADCINA2,ADCINA3,41,40,U2,T2,37,33,1,Clean ADCIN2/3 differential pair; avoids A0/A1/B0/B1 special loading
+ADCB,ADCINB2,ADCINB3,48,49,V3,W3,53,50,1,Clean ADCIN2/3 differential pair; avoids A0/A1/B0/B1 special loading
+ADCC,ADCINC2,ADCINC3,31,30,R3,P3,35,32,1,Clean ADCIN2/3 differential pair; avoids A0/A1/B0/B1 special loading
+ADCD,ADCIND2,ADCIND3,58,59,T6,U6,55,51,1,Clean ADCIN2/3 differential pair; avoids A0/A1/B0/B1 special loading

@@ -1,0 +1,4 @@
+design,channels,wordsPerAdcCycle,bytesPerSecond,bufferBytes1024,resultLatchMarginNs,errataSafe,selected,note
+D1_selected_direct_late_ADCINT,4,10,4000000,81920,10,1,1,DMA starts >=15 ns after late ADCINT; last result latches after 5 ns
+D2_early_interrupt,4,10,4000000,81920,-585,0,0,Early trigger can precede result
+D3_CPU_copy,0,10,4000000,81920,0,1,0,Safe but spends CPU budget

@@ -1,0 +1,11 @@
+soc,purpose,epwm,compare,nominalCompare,triggerUs,acquisitionStartUs,acquisitionEndUs,resultReadyUs,adcs,channelPair
+0,edge_pre_1,EPWM4_SOCB,1730,1730,17.3,17.3,17.62,17.9,ADCA/B/C/D identical,ADCIN2/ADCIN3
+1,edge_pre_2,EPWM4_SOCB,1730,1730,17.3,18.215,18.535,18.815,ADCA/B/C/D identical,ADCIN2/ADCIN3
+2,edge_pre_3,EPWM4_SOCB,1730,1730,17.3,19.13,19.45,19.73,ADCA/B/C/D identical,ADCIN2/ADCIN3
+3,edge_post_1,EPWM2_SOCA,50,50,0.5,0.5,0.82,1.1,ADCA/B/C/D identical,ADCIN2/ADCIN3
+4,edge_post_2,EPWM2_SOCA,50,50,0.5,1.415,1.735,2.015,ADCA/B/C/D identical,ADCIN2/ADCIN3
+5,edge_post_3,EPWM2_SOCA,50,50,0.5,2.33,2.65,2.93,ADCA/B/C/D identical,ADCIN2/ADCIN3
+6,C_on_start,EPWM2_SOCB,350,350,3.5,3.5,3.82,4.1,ADCA/B/C/D identical,ADCIN2/ADCIN3
+7,C_on_end,EPWM3_SOCA,NaN,720,7.2,7.2,7.52,7.8,ADCA/B/C/D identical,ADCIN2/ADCIN3
+8,C_off_start,EPWM3_SOCB,NaN,880,8.8,8.8,9.12,9.4,ADCA/B/C/D identical,ADCIN2/ADCIN3
+9,C_off_end,EPWM4_SOCA,1650,1650,16.5,16.5,16.82,17.1,ADCA/B/C/D identical,ADCIN2/ADCIN3

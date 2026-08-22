@@ -1,0 +1,9 @@
+gateName,pass,evidence
+A_DATASHEET_CLOSURE,1,"13 critical parameters have TI primary-source citations"
+B_FULL_APERTURE,1,"2.150 us full aperture in 2.200 us window"
+C_FOUR_ADC_SYNC,1,"Same ePWM trigger, ADCCLK, ACQPS, resolution and SOC policy on ADCA-D"
+D_AFE_SETTLING,1,"Rs=50 ohm: required 276.2 ns, allocated 320.0 ns"
+E_COMMON_MODE,1,"worst p95 C 1.64%, ESR 2.61% with finite CMRR"
+F_ERRATA_SAFE,1,"Revision C selection plus mode/INT/DMA mitigations closed"
+G_REAL_TIME,1,"ADC utilization 45.75% and compute allocation 20.0 us/20 us"
+H_DEVICE_ACCURACY,1,"minimum case pass fraction 100.0% across 200 seeds"

@@ -1,0 +1,6 @@
+erratum,appliesRevisionC,mitigation,status,siliconRevision
+ADC offset trim by mode,1,Call ADC_setMode after device startup,PASS,C
+ADCINT can stop,1,Use continuous ADCINT and clear INT/overflow,PASS,C
+DMA stale result,1,16-bit DIV4 has one SYSCLK EOC-to-latch gap; DMA earliest three cycles,PASS_BY_TIMING_PROOF,C
+ADC random conversion sparkle,0,Incoming inspection requires revision C; 40 MHz workaround not used,NOT_APPLICABLE_REV_C,C
+ADC input model special pins,1,Use ADCIN2/3 pairs on all four modules,PASS,C

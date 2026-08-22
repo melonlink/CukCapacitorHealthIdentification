@@ -1,0 +1,11 @@
+item,cyclesSysclk,timeNs,value,unit,source
+SYSCLK period,1,5,200000000,Hz,SPRS880P SYSCLK max
+ADCCLK period,4,20,50000000,Hz,SPRS880P Table 6-47
+acquisition,64,320,3.2e-07,s,ACQPS=63 and SPRS880P minimum
+conversion,119,595,5.95e-07,s,TRM Table 11-12
+start-to-next-start,183,915,9.15e-07,s,TRM acquisition plus conversion
+trigger-to-result,120,600,6e-07,s,TRM Table 11-12
+sustainable rate,NaN,NaN,1092896.17486339,sample/s,computed
+EPWMCLK,NaN,10,100000000,Hz,SPRS880P: EPWMCLK max 100 MHz
+PWM period,4000,20000,2e-05,s,50 kHz requirement
+per-ADC utilization,1830,9150,0.4575,fraction,computed
