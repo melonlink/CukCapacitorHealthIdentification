@@ -1,0 +1,53 @@
+\section{Online Estimation Realizations}
+\label{sec:estimators}
+
+Both realizations consume the same accepted edge and charge rows from Section~\ref{sec:observations}, separating observation effects from recursive-kernel effects.
+
+\subsection{Primary Realization: \TSRLS{}}
+
+The primary implementation uses one scalar RLS recursion for $\alphab$ and one for $r_C$. For direction $j\in\{C,R\}$, write an accepted row as $z_{j,k}=h_{j,k}\theta_{j,k}+\nu_{j,k}$. With forgetting factor $\lambda=0.9975$,
+\begin{align}
+K_{j,k}&=\frac{P_{j,k-1}h_{j,k}}
+{\lambda+h_{j,k}^{2}P_{j,k-1}},
+\label{eq:rls_gain}\\
+\hat\theta_{j,k}&=\hat\theta_{j,k-1}
++K_{j,k}(z_{j,k}-h_{j,k}\hat\theta_{j,k-1}),
+\label{eq:rls_state}\\
+P_{j,k}&=\lambda^{-1}(P_{j,k-1}-K_{j,k}h_{j,k}P_{j,k-1}).
+\label{eq:rls_cov}
+\end{align}
+Only the direction associated with an accepted observation is updated. Validity gating rejects observations that fail predeclared edge/charge acceptance rules; projection enforces physical parameter intervals. The reported health values are
+\begin{equation}
+\hat C=\frac{C_b}{\hat\alphab},\qquad
+\widehat{\ESR}=\hat r_C.
+\label{eq:health_outputs}
+\end{equation}
+Equations~\eqref{eq:rls_gain}--\eqref{eq:rls_cov} are standard RLS recursions. The \TSRLS{} name denotes their topology-synchronous, direction-specific use with the proposed observations; RLS itself is not presented as the novelty.
+
+The implementation reconstructs $i_C$, validates CCM, forms edge or charge features, applies physical/residual gates, and updates only the active scalar direction. Internal updates are consolidated into an external health report every 1024 switching cycles.
+
+\subsection{Uncertainty-Aware Extension: \TSKF{}}
+
+The extension maintains the structured state
+\begin{equation}
+\vect{x}_k=\begin{bmatrix}v_{C,k}&\alphab_k&r_{C,k}\end{bmatrix}^{\mathsf T}.
+\label{eq:kf_state}
+\end{equation}
+For an intersample charge increment $q_k$, the ideal propagation contains
+\begin{equation}
+\vect{F}_k=
+\begin{bmatrix}
+1&q_k/C_b&0\\0&1&0\\0&0&1
+\end{bmatrix}.
+\label{eq:kf_transition}
+\end{equation}
+The stable terminal-voltage, charge, and edge rows use the structured directions
+\begin{equation}
+\vect{H}_V=[1,0,0],\quad
+\vect{H}_C=[0,q/C_b,0],\quad
+\vect{H}_R=[0,0,k_RI_\Sigma].
+\label{eq:kf_directions}
+\end{equation}
+Accepted rows use scalar Joseph-form covariance updates, predeclared process and measurement covariances, and normalized-innovation gating. This extension provides posterior-covariance-based confidence reporting; it is not assumed to lead every point-estimation metric, and its negative dynamic results are retained in Section~\ref{sec:results}.
+
+The covariance readout is intrinsic to \TSKF{}. The \TSRLS{} interval is instead an auxiliary residual-weighted sandwich diagnostic that does not affect the estimate; the two intervals therefore have different statistical meanings.

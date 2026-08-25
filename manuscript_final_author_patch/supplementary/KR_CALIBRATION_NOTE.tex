@@ -1,0 +1,39 @@
+\section*{Supplementary Note S2: $k_R$ Calibration Provenance}
+
+This note records the closed edge-gain simulation-calibration provenance and the subsequent result regeneration. The archived v2.1 calibration chain was rerun from its source models, measurement-chain settings, and declared seeds. Each accepted edge supplies
+\[
+\kappa_m=\frac{z_{R,m}}{I_{\Sigma,m}r_{C,\mathrm{ref},m}},
+\qquad
+\hat k_R=\operatorname{median}_m\kappa_m.
+\]
+The reference ESR is the planted Model-A/Model-B simulation parameter. The implementation pools 147 finite ratios from each of four profiles and applies an unweighted median; its only omission rule is \texttt{NaN} removal. The resulting 588-ratio median exactly reproduces the archived v2.1 lock. Following the project decision, this full-precision value replaced the historical 0.982 campaign center, and all affected ESR results were regenerated with unchanged algorithms, hyperparameters, cases, and seeds.
+
+\begin{table}[h]
+\caption*{Table S2. $k_R$ calibration provenance}
+\centering
+\footnotesize
+\begin{tabular}{p{4.2cm}p{7.0cm}}
+\toprule
+Item & Value \\
+\midrule
+Calibration source & Archived v2.1 Model-A/Model-B simulation calibration \\
+Reference ESR & \texttt{SIMULATION\_REFERENCE\_TRUTH}, 0.05~$\Omega$ per calibration profile \\
+Operating profiles & nominal; high duty/load; high noise; nominal Model-B with 10-nH ESL \\
+Seeds & 11901--11904 \\
+Accepted ratios & 588 (147 per profile) \\
+Rejection rule & omit \texttt{NaN}; no residual rejection or trimming \\
+Weighting & none \\
+Aggregation & median of pooled $z_R/(I_\Sigma r_{C,\mathrm{ref}})$ ratios \\
+Reproduced v2.1 value & 0.97719802594550731 \\
+Archived v2.1 lock & 0.97719802594550731 \\
+Recalibrated paper center & 0.97719802594550731 \\
+Historical superseded center & 0.982 \\
+Rerun scope & 4608-row factorial; static/dynamic algorithm-selection campaigns \\
+Classification & \texttt{EXACT\_REPRODUCTION\_ADOPTED} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The v1.1 evaluated proof constant $k_{R,\min}^{\mathrm{eval}}=0.957654065426597$ is $0.98$ times the archived v2.1 coefficient. It is a conservative evaluated-envelope lower bound and is not an online calibration value.
+
+A separate 35-row residual-calibration-sensitivity check used five representative O1 cases, no retuning, and assumed gain errors from $-1\%$ to $+1\%$. Mean endpoint ESR bias ranged from $+1.0225\%$ at $-1\%$ gain error to $-0.9779\%$ at $+1\%$; the worst absolute case was $1.1708\%$. Unlike the casewise $\pm0.006$ variation in the main evaluation, this check represents residual unknown calibration error. It follows the inverse-scale relation while retaining finite observation noise. The later full rerun adopted the reproduced center rather than using the sensitivity study as an optimization.

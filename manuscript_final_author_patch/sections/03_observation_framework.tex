@@ -1,0 +1,116 @@
+\section{Topology-Synchronous Decoupled Observation Framework}
+\label{sec:observations}
+
+\subsection{Natural Bidirectional Excitation}
+
+At a valid $u:0\rightarrow1$ transition, the capacitor current changes from $i_C^-=i_1^-$ to $i_C^+=-i_2^+$. Hence
+\begin{equation}
+\Delta i_C=i_C^+-i_C^-=-(i_1^-+i_2^+).
+\label{eq:current_commutation}
+\end{equation}
+Because the internal ideal-capacitor voltage cannot jump, $v_C^+=v_C^-$. The terminal voltages immediately before and after the edge satisfy
+\begin{align}
+v_T^-&=v_C+r_Ci_1^-,\\
+v_T^+&=v_C-r_Ci_2^+,
+\end{align}
+which gives the ideal ESR signature
+\begin{equation}
+v_T^- - v_T^+=r_C(i_1^-+i_2^+).
+\label{eq:ideal_edge}
+\end{equation}
+Thus, the topology transition provides a large, signed current change while cancelling the continuous internal voltage.
+
+\subsection{Timestamp-Reconstructed ESR Observation}
+
+Direct edge samples are contaminated by acquisition skew, finite bandwidth, and switching transients. The proposed measurement therefore fits local linear models to timestamped points in safe pre- and post-edge windows and extrapolates both models to a common switching timestamp. With reconstructed intercepts $\hat v_T^-$ and $\hat v_T^+$, the accepted ESR row is
+\begin{equation}
+z_R=\hat v_T^- -\hat v_T^+
+=k_R I_\Sigma r_C+\nu_R,
+\quad I_\Sigma=i_1^-+i_2^+,
+\label{eq:esr_observation}
+\end{equation}
+where $k_R$ is a training-locked calibration coefficient and $\nu_R$ collects voltage, timestamp, fitting, and residual front-end errors. The reconstruction estimates the discontinuity at one physical instant instead of subtracting samples taken at different offsets.
+
+Simulation calibration and blind health identification use disjoint cases. Four calibration profiles---nominal, high duty/load, high noise, and nominal parasitic Model B---form the accepted-edge ratio
+\begin{equation}
+\kappa_m=\frac{z_{R,m}}{I_{\Sigma,m}r_{C,\mathrm{ref},m}},
+\qquad
+\hat k_R=\operatorname{median}_m\kappa_m,
+\label{eq:kr_calibration}
+\end{equation}
+where $r_{C,\mathrm{ref},m}$ is the planted simulation reference ESR. The resulting training-locked coefficient is $k_R=0.9772$. The manuscript reports $k_R$ to four decimal places; the full-precision value used in all regenerated results is retained in Supplementary Note S2 and the source-traceability record.
+
+The $\pm0.006$ spread represents case-to-case variation in the calibrated measurement-chain gain. For each simulated case, the realized coefficient is assumed known after calibration and is supplied identically to all compared estimators through $h_R=k_RI_\Sigma$. It therefore tests calibrated unit-to-unit variability rather than residual unknown calibration error; $k_R$ is never updated from blind residuals. A hardware realization would require commissioning with an independently characterized reference capacitor under the final measurement chain.
+
+Thus, $k_R$ is known and fixed within each identification interval; otherwise the edge row identifies only the product $k_Rr_C$. The smaller evaluated-envelope value $k_{R,\min}^{\mathrm{eval}}=0.957654$ is used only for a conservative information bound and does not resolve this scale ambiguity.
+
+\subsection{Safe-Window Charge Observation}
+
+For an interval $[t_a,t_b]$ wholly inside one switching state, with the charge-safe-window length denoted by $T_{w,C}=t_b-t_a$, define
+\begin{equation}
+q=\int_{t_a}^{t_b}i_C(t)\,dt.
+\label{eq:charge}
+\end{equation}
+Integration of~\eqref{eq:cap_port} yields
+\begin{equation}
+\Delta v_T=\frac{q}{C}+r_C\Delta i_C.
+\label{eq:integral_port}
+\end{equation}
+Using the most recent accepted ESR estimate gives the capacitance pseudo-measurement
+\begin{equation}
+z_C=\Delta v_T-\hat r_C\Delta i_C
+=\frac{q}{C_b}\alphab+\nu_C.
+\label{eq:c_observation}
+\end{equation}
+The charge row is evaluated away from the switching edge and is capacitance-dominant after ESR compensation. ESR-estimation uncertainty and residual correlation enter the conditional measurement covariance.
+
+More explicitly, first-order substitution of measured endpoint current, voltage, charge, and the preceding ESR estimate gives
+\begin{multline}
+z_C=\frac{q}{C_b}\alphab+(r_C-\hat r_C)\Delta i_C
++\nu_{\Delta v}-\hat r_C\nu_{\Delta i}+\nu_q,
+\label{eq:c_mismatch}
+\end{multline}
+where $\nu_q$ is the voltage-equivalent charge-integration error. In the evaluated implementation its unscaled charge variance is denoted $R_q$, so that $\operatorname{var}(\nu_q)=\alphab^2R_q$. Treating the preceding ESR error as a zero-mean conditional uncertainty with variance $P_{rr}$ yields
+\begin{equation}
+R_C\simeq R_{\Delta v}+(\Delta i_C)^2P_{rr}
++\hat r_C^2R_{\Delta i}+\alphab^2R_q.
+\label{eq:c_covariance}
+\end{equation}
+Here $R_{\Delta v}=2R_v$, $R_{\Delta i}=2R_i$, and $R_q$ follows from current-noise variance, the ADC interval, and the integration length. Equation~\eqref{eq:c_covariance} propagates uncertainty; a biased $(r_C-\hat r_C)\Delta i_C$ remains bounded model mismatch rather than white noise.
+
+\begin{table}[t]
+\caption{Decoupled Observation Rows}
+\label{tab:observations}
+\centering
+\footnotesize
+\begin{tabular}{p{0.9cm}p{2.35cm}p{2.1cm}p{1.35cm}}
+\toprule
+Row & Measurement & Regression & Dominant parameter \\
+\midrule
+Edge & $\hat v_T^- -\hat v_T^+$ & $k_R I_\Sigma r_C+\nu_R$ & $r_C$ \\
+Charge & $\Delta v_T-\hat r_C\Delta i_C$ & $(q/C_b)\alphab+\nu_C$ & $\alphab$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Validity and Update Policy}
+
+An observation is accepted only in CCM with a valid timestamp, topology state, and complete safe window. Denoting these prechecks by $\mathcal S_C$ and $\mathcal S_R$, the common evaluation stream implements
+\begin{equation}
+\begin{aligned}
+\mathcal V_C&=\mathrm{CCM}\wedge\mathcal S_C\wedge(n_C>0),\\
+\mathcal V_R&=\mathrm{CCM}\wedge\mathcal S_R\wedge
+(I_\Sigma\ge I_{\Sigma,\mathrm{gate}}),
+\end{aligned}
+\label{eq:gates}
+\end{equation}
+with the predeclared $I_{\Sigma,\mathrm{gate}}=0.12$~A. Charge acceptance uses the CCM/safe-window flag and a nonzero accepted-charge count; the implementation has no separate numeric $q_{\mathrm{gate}}$. An NIS threshold of 9 may reject additional \TSKF{} outliers. A failed gate holds the corresponding estimate. The evaluated-envelope minima in Section~\ref{sec:identifiability} are proof constants, not online thresholds.
+
+Since the capacitance regressor is $h_C=q/C_b$, low-charge rows inherently contribute little information. The positive information guarantee is therefore restricted to the evaluated valid-CCM envelope rather than asserted for arbitrarily small $q$.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.97\textwidth]{fig02_observation_framework.pdf}
+\caption{Core topology-synchronous decoupled observation framework. The edge-fit window $T_{w,R}$ and charge-safe window $T_{w,C}$ remain distinct; the downstream recursive estimators use standard scalar update principles.}
+\label{fig:framework}
+\end{figure*}

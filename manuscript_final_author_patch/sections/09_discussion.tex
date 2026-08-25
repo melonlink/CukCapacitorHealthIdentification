@@ -1,0 +1,28 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why Observation Design Matters}
+
+The O0--O1 factorial separates observation design from estimator complexity. With the RLS kernel unchanged, O1 reduced capacitance MAPE from $7.0366\%$ to $0.3727\%$, ESR MAPE from $1.1970\%$ to $0.2233\%$, and mean internal convergence from 665.41 to 13.21 cycles. This attribution agrees with the circuit physics: the switching edge exposes the ESR drop, while the in-state charge balance exposes inverse capacitance. More elaborate recursion cannot reliably compensate for observations that mix these effects or compare mismatched timestamps.
+
+The scoped literature matrix contains no disclosed method combining the \Cuk{} transfer-capacitor target, $+i_{L1}\leftrightarrow-i_{L2}$ commutation, timestamp-reconstructed edge information, and direction-specific charge/edge updates. This is a bounded review finding, not a universal first-in-literature claim.
+
+\subsection{Why \TSRLS{} Is Primary}
+
+\TSRLS{} is primary because it combines low ESR error, rapid convergence, low operation count, and the better aggregate ramp-tracking tradeoff. This choice neither makes RLS a novelty nor implies superiority in every metric. \TSKF{} remains valuable for confidence-aware reporting: its joint coverage is much closer to nominal, but its slower ramp response and retained abrupt-step failures limit it as the sole point estimator. An adaptive change detector or process-noise policy could alter that tradeoff but lies outside the evaluated design.
+
+\subsection{Limitations}
+
+The evidence has six principal boundaries.
+\begin{enumerate}
+\item Identifiability and updates require valid CCM; DCM and weak-excitation intervals hold the estimate. The method assumes availability of both inductor currents; applications lacking either measurement require an additional sensor or independently validated current reconstruction.
+\item The reported ESR is an effective condition indicator at the modeled switching, thermal, and frequency conditions, not a temperature-independent aging variable.
+\item The $0.1$--$100$~s trajectories are synthetic or trace-derived bandwidth tests, not run-to-failure data; abrupt discontinuities are recovery stress tests rather than aging events.
+\item Hardware validation remains open for edge ringing, isolation/probing, AFE common-mode rejection, and production calibration.
+\item The F28379D study is device-realistic simulation; target compilation and measured WCET have not been demonstrated.
+\item The auxiliary \TSRLS{} intervals are under-covered, while \TSKF{} retains the reported dynamic limitations; confidence calibration and point-tracking performance therefore remain a tradeoff.
+\end{enumerate}
+
+\subsection{Experimental Roadmap}
+
+The next stage should use a controlled C/ESR network in the energy-transfer branch, the specified F28379D schedule, separate absolute- and edge-voltage paths, and synchronized inductor-current measurements. Tests should sweep input voltage, duty ratio, load, and temperature; characterize ringing and AFE rejection; verify calibration against offline impedance measurements; and measure WCET before firmware release.

@@ -1,0 +1,17 @@
+check_id,quantity,unit,v03_value,v031_value,status,source_v03,source_v031,note
+SCI31-001,TS-D-RLS C mean MAPE,percent,0.3727,0.3727,UNCHANGED,manuscript_v03/sections/07_results.tex,manuscript_v031/sections/07_results.tex,frozen static metric
+SCI31-002,TS-D-RLS ESR mean MAPE,percent,0.2233,0.2233,UNCHANGED,manuscript_v03/sections/07_results.tex,manuscript_v031/sections/07_results.tex,frozen static metric
+SCI31-003,TS-D-RLS convergence,internal cycles,13.21,13.21,UNCHANGED,manuscript_v03/sections/07_results.tex,manuscript_v031/sections/07_results.tex,frozen static metric
+SCI31-004,TS-SLTVKE C mean MAPE,percent,0.3011,0.3011,UNCHANGED,manuscript_v03/sections/07_results.tex,manuscript_v031/sections/07_results.tex,frozen static metric
+SCI31-005,TS-SLTVKE ESR mean MAPE,percent,0.6446,0.6446,UNCHANGED,manuscript_v03/sections/07_results.tex,manuscript_v031/sections/07_results.tex,frozen static metric
+SCI31-006,Dual EKF C mean MAPE,percent,0.3043,0.3043,UNCHANGED,manuscript_v03/sections/07_results.tex,manuscript_v031/sections/07_results.tex,frozen static metric
+SCI31-007,Dual EKF ESR mean MAPE,percent,1.1938,1.1938,UNCHANGED,manuscript_v03/sections/07_results.tex,manuscript_v031/sections/07_results.tex,frozen static metric
+SCI31-008,mu_C lower bound,1,0.217943,0.217943,UNCHANGED,manuscript_v03/sections/04_identifiability.tex,manuscript_v031/sections/04_identifiability.tex,Proposition 1 mathematics unchanged
+SCI31-009,mu_R lower bound,1,880.008,880.008,UNCHANGED,manuscript_v03/sections/04_identifiability.tex,manuscript_v031/sections/04_identifiability.tex,Proposition 1 mathematics unchanged
+SCI31-010,k_R internal computation value,1,0.97719802594550731,0.97719802594550731,UNCHANGED,manuscript_v03/source_traceability/PARAMETER_SOURCE_MATRIX.csv,manuscript_v031/source_traceability/PARAMETER_SOURCE_MATRIX.csv,full precision retained outside main text
+SCI31-011,k_R manuscript display,1,0.9772,0.9772,UNCHANGED,manuscript_v03/sections/03_observation_framework.tex,manuscript_v031/sections/03_observation_framework.tex,four-decimal display
+SCI31-012,I_Sigma gate,A,0.12,0.12,UNCHANGED,manuscript_v03/sections/03_observation_framework.tex,manuscript_v031/sections/03_observation_framework.tex,frozen gate
+SCI31-013,T_w_C,us,2.0,2.0,UNCHANGED,manuscript_v03/sections/02_modeling.tex,manuscript_v031/sections/02_modeling.tex,frozen charge window
+SCI31-014,T_w_R,us,2.2,2.2,UNCHANGED,manuscript_v03/sections/02_modeling.tex,manuscript_v031/sections/02_modeling.tex,frozen edge-fit window
+SCI31-015,F28379D worst p95 C error,percent,1.6425,1.6425,UNCHANGED,manuscript_v03/sections/08_device_realistic.tex,manuscript_v031/sections/08_device_realistic.tex,frozen device-realistic metric
+SCI31-016,F28379D worst p95 ESR error,percent,2.6109,2.6109,UNCHANGED,manuscript_v03/sections/08_device_realistic.tex,manuscript_v031/sections/08_device_realistic.tex,frozen device-realistic metric

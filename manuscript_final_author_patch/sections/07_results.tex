@@ -1,0 +1,120 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Attribution to the Observation Framework}
+
+The observation--estimator factorial provides the clearest attribution. Replacing O0 with O1 while retaining the E1 RLS kernel reduced mean capacitance MAPE from $7.0366\%$ to $0.3727\%$, mean ESR MAPE from $1.1970\%$ to $0.2233\%$, and mean internal convergence from $665.41$ to $13.21$ switching cycles. The paired ESR reduction was $0.97369$ percentage points (95\% bootstrap interval 0.92352--1.0265); all 4608 rows were retained. Supplementary Note S3 gives the other paired intervals.
+
+O1 also reduced capacitance MAPE by more than 6.7 percentage points for Dual EKF and E3 LTV/Joseph. The improvement was not universal: the Dual-EKF ESR-p95 effect was negative and its interval did not favor O1. Thus, the factorial supports the observation framework without implying monotonic improvement in every estimator metric.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_observation_effect.pdf}
+\caption{Paired O0--O1 effects on MAPE and p95 error with bootstrap intervals. Positive values favor the topology-decoupled O1 observations; the adverse Dual-EKF ESR-p95 effect is retained.}
+\label{fig:observation_effect}
+\end{figure}
+
+\subsection{Static Estimator Comparison Under O1}
+
+Table~\ref{tab:static_estimators} compares the three candidates on the $48\times4\times4$ O1 matrix. \TSKF{} and Dual EKF gave slightly lower mean capacitance error, whereas \TSRLS{} gave the lowest ESR error and fastest native convergence; none diverged. \TSRLS{} is therefore adopted as the primary lightweight realization because it provides the more favorable aggregate tradeoff among ESR accuracy, convergence, degradation tracking, and arithmetic cost over the evaluated cases.
+
+\begin{table}[t]
+\caption{Static O1 Estimator Comparison With Internal Convergence}
+\label{tab:static_estimators}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrr}
+\toprule
+Method & C MAPE & ESR MAPE & C/ESR p95 & Conv. \\
+ & (\%) & (\%) & (\%) & (int. cycles) \\
+\midrule
+\TSRLS{} & 0.3727 & \textbf{0.2233} & 1.3182/0.7002 & \textbf{13.21} \\
+\TSKF{} & \textbf{0.3011} & 0.6446 & 1.1069/2.4992 & 33.09 \\
+Dual EKF & 0.3043 & 1.1938 & 1.1492/3.8602 & 40.58 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_static_comparison.pdf}
+\caption{Static capacitance and ESR errors under common O1 observations. The tradeoff motivates the dual-realization decision.}
+\label{fig:static_comparison}
+\end{figure}
+
+\subsection{Noise and Timing Robustness}
+
+All combinations of four noise profiles and 0, 20, 50, and 100~ns residual mismatch were retained. At 50~ns under F28379D-realistic noise, C/ESR p95 errors were $0.4964\%/0.3385\%$ for \TSRLS{}, $0.4132\%/0.6888\%$ for \TSKF{}, and $0.4211\%/1.9141\%$ for Dual EKF. Figure~\ref{fig:noise_timing} visualizes that device-realistic profile; C and ESR percentiles are shown separately because their arithmetic mean has no independent interpretation.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_noise_timing.pdf}
+\caption{C and ESR p95 errors versus residual timing mismatch under the F28379D-realistic noise profile and shared O1 observations. Distinct line and marker styles preserve method identity in grayscale.}
+\label{fig:noise_timing}
+\end{figure}
+
+\subsection{Abrupt Stress Tests}
+
+Abrupt discontinuities are recovery stress tests, not aging events. \TSKF{} did not satisfy the convergence criterion within 257 post-step cycles for either health step; its tail errors were $19.2911\%$ after $C\rightarrow0.8C$ and $49.9384\%$ after $r_C\rightarrow2r_C$. These retained negative results are a principal reason it is presented as an uncertainty extension rather than the sole estimator.
+
+\subsection{Slow Degradation Tracking}
+
+Across the $0.1$--$100$~s sweep in Table~\ref{tab:ramps}, \TSRLS{} had lower aggregate combined nRMSE and normalized lag at all four durations. Individual trajectories can still favor \TSKF{}; one 10-s C-ramp case did so. The supported conclusion is therefore aggregate rather than universal.
+
+\begin{table}[t]
+\caption{Aggregate Slow-Degradation Tracking}
+\label{tab:ramps}
+\centering
+\footnotesize
+\begin{tabular}{rrrrr}
+\toprule
+Ramp & \multicolumn{2}{c}{Combined nRMSE} & \multicolumn{2}{c}{Normalized lag (\%)}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+(s) & \TSRLS{} & \TSKF{} & \TSRLS{} & \TSKF{} \\
+\midrule
+0.1 & 0.1161 & 0.2160 & 8.053 & 22.027 \\
+1   & 0.0163 & 0.0454 & 1.360 & 3.537 \\
+10  & 0.0160 & 0.0456 & 1.752 & 4.492 \\
+100 & 0.0213 & 0.0477 & 2.827 & 4.868 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.82\textwidth]{fig_joint_ramp.pdf}
+\caption{Representative joint C-down/ESR-up health ramps. Long-duration trajectories use trace-derived O1 sufficient statistics rather than full Simscape transients or measured aging data.}
+\label{fig:joint_ramp}
+\end{figure*}
+
+\subsection{Operating-Point Transient Immunity}
+
+Load, input-voltage, and duty transitions held health fixed. \TSKF{} reduced the mean false-C peak ($0.7570\%$ versus $1.3017\%$), whereas \TSRLS{} reduced the mean false-ESR peak ($1.8474\%$ versus $5.1919\%$) and recovered faster. Neither method therefore dominates operating-transient immunity; Supplementary Fig.~S4 shows the retained load-step traces.
+
+\subsection{Complexity and Uncertainty}
+
+On the common arithmetic basis in Table~\ref{tab:complexity}, \TSRLS{}, \TSKF{}, and Dual EKF require 28, 46, and 62 multiplications per accepted observation. Their joint 95\% interval coverages are $13.00\%$, $88.93\%$, and $81.90\%$, respectively. Thus, \TSRLS{} provides the lower-cost tracking realization. \TSKF{} is retained as an uncertainty-aware realization of the same observation framework because its interval coverage is substantially better calibrated, despite less favorable aggregate tracking and point-estimation tradeoffs. The listed times are arithmetic estimates, not measured target WCET; acquisition and feature-processing costs are separate.
+
+\begin{table}[t]
+\caption{Per-Accepted-Observation Complexity}
+\label{tab:complexity}
+\centering
+\footnotesize
+\begin{tabular}{lrrrr}
+\toprule
+Method & Mult. & Add. & Div. & Est. time ($\mu$s) \\
+\midrule
+\TSRLS{} & 28 & 20 & 1 & 1.36 \\
+\TSKF{} & 46 & 34 & 1 & 2.12 \\
+Dual EKF & 62 & 47 & 2 & 3.05 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_complexity_pareto.pdf}
+\caption{Accuracy--complexity tradeoff under the common operation-count model. The ordinate is the arithmetic mean of C and ESR MAPE values, used only as a visual Pareto summary and not as the estimator-selection objective.}
+\label{fig:complexity_pareto}
+\end{figure}
