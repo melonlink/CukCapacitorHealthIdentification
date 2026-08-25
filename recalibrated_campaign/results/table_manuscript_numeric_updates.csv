@@ -1,0 +1,89 @@
+section,quantity,old_value,new_value,delta,unit,source_table,changed
+Results/observation factorial,E1 RLS C_MAPE_percent,0.372680462278862,0.372680462278862,0,percent,table_observation_estimator_factorial.csv,0
+Results/observation factorial,E1 RLS ESR_MAPE_percent,0.222188144681208,0.223280348154239,0.00109220347303099,percent,table_observation_estimator_factorial.csv,1
+Results/observation factorial,E1 RLS C_p95_percent,1.32648620767007,1.32648620767007,0,percent,table_observation_estimator_factorial.csv,0
+Results/observation factorial,E1 RLS ESR_p95_percent,0.698112302455162,0.701541146753578,0.00342884429841606,percent,table_observation_estimator_factorial.csv,1
+Results/observation factorial,E1 RLS mean_convergence_cycles,13.1888020833333,13.2109375,0.0221354166666998,cycles,table_observation_estimator_factorial.csv,1
+Results/observation factorial,E2 Dual EKF C_MAPE_percent,0.304340016733086,0.304340016733086,0,percent,table_observation_estimator_factorial.csv,0
+Results/observation factorial,E2 Dual EKF ESR_MAPE_percent,1.19225037349521,1.1938102815942,0.00155990809899009,percent,table_observation_estimator_factorial.csv,1
+Results/observation factorial,E2 Dual EKF C_p95_percent,1.15068436116824,1.15068436116824,0,percent,table_observation_estimator_factorial.csv,0
+Results/observation factorial,E2 Dual EKF ESR_p95_percent,3.87138998213082,3.87723942723544,0.00584944510461982,percent,table_observation_estimator_factorial.csv,1
+Results/observation factorial,E2 Dual EKF mean_convergence_cycles,40.5703125,40.5794270833333,0.00911458333330017,cycles,table_observation_estimator_factorial.csv,1
+Results/observation factorial,E3 LTV/Joseph C_MAPE_percent,0.301149059504354,0.301149059504354,0,percent,table_observation_estimator_factorial.csv,0
+Results/observation factorial,E3 LTV/Joseph ESR_MAPE_percent,0.64283085961941,0.644627911791199,0.00179705217178905,percent,table_observation_estimator_factorial.csv,1
+Results/observation factorial,E3 LTV/Joseph C_p95_percent,1.11726993503184,1.11726993503184,0,percent,table_observation_estimator_factorial.csv,0
+Results/observation factorial,E3 LTV/Joseph ESR_p95_percent,2.50347620426762,2.51660620868948,0.0131300044218596,percent,table_observation_estimator_factorial.csv,1
+Results/observation factorial,E3 LTV/Joseph mean_convergence_cycles,33.03515625,33.09375,0.05859375,cycles,table_observation_estimator_factorial.csv,1
+Results/paired bootstrap,E1 RLS C_MAPE mean_paired_effect,6.6638696567882,6.6638696567882,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E1 RLS C_MAPE ci95_low,6.47324865483926,6.47324865483926,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E1 RLS C_MAPE ci95_high,6.85797763757601,6.85797763757601,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E1 RLS ESR_MAPE mean_paired_effect,0.974782021775528,0.973689818302496,-0.00109220347303196,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E1 RLS ESR_MAPE ci95_low,0.924634566097647,0.923516433528045,-0.00111813256960203,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E1 RLS ESR_MAPE ci95_high,1.02767144203616,1.02651596329371,-0.00115547874244992,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E1 RLS convergence mean_paired_effect,652.223958333333,652.201822916667,-0.0221354166660603,cycles,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E1 RLS convergence ci95_low,620.62890625,620.606770833333,-0.0221354166669698,cycles,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E1 RLS convergence ci95_high,683.78515625,683.751302083333,-0.0338541666669698,cycles,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E2 Dual EKF C_MAPE mean_paired_effect,6.71132411618707,6.71132411618707,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E2 Dual EKF C_MAPE ci95_low,6.52269769159797,6.52269769159797,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E2 Dual EKF C_MAPE ci95_high,6.89758230157919,6.89758230157919,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E2 Dual EKF ESR_MAPE mean_paired_effect,0.0620889559320582,0.0605290478330684,-0.0015599080989898,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E2 Dual EKF ESR_MAPE ci95_low,-0.0297825393253005,-0.0314616523940371,-0.0016791130687366,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E2 Dual EKF ESR_MAPE ci95_high,0.154783813857429,0.153393616024969,-0.00139019783246,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E2 Dual EKF convergence mean_paired_effect,649.979166666667,649.970052083333,-0.00911458333393966,cycles,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E2 Dual EKF convergence ci95_low,616.489583333333,616.479166666667,-0.0104166666660603,cycles,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E2 Dual EKF convergence ci95_high,682.555989583333,682.548828125,-0.00716145833303017,cycles,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E3 LTV/Joseph C_MAPE mean_paired_effect,6.73776105634078,6.73776105634078,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E3 LTV/Joseph C_MAPE ci95_low,6.55424309313902,6.55424309313902,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E3 LTV/Joseph C_MAPE ci95_high,6.92682878222072,6.92682878222072,0,percent,table_observation_effect_bootstrap.csv,0
+Results/paired bootstrap,E3 LTV/Joseph ESR_MAPE mean_paired_effect,0.579612627023268,0.577815574851479,-0.00179705217178894,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E3 LTV/Joseph ESR_MAPE ci95_low,0.500884233018052,0.499058709745717,-0.00182552327233498,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E3 LTV/Joseph ESR_MAPE ci95_high,0.657951378976891,0.65646383253962,-0.001487546437271,percent,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E3 LTV/Joseph convergence mean_paired_effect,690.692708333333,690.634114583333,-0.05859375,cycles,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E3 LTV/Joseph convergence ci95_low,657.475911458333,657.412760416667,-0.0631510416660603,cycles,table_observation_effect_bootstrap.csv,1
+Results/paired bootstrap,E3 LTV/Joseph convergence ci95_high,722.5078125,722.466145833333,-0.0416666666669698,cycles,table_observation_effect_bootstrap.csv,1
+Results/static comparison,M1 TS-D-RLS C_mean_MAPE_percent,0.372680462278862,0.372680462278862,0,percent,table_algorithm_static_comparison.csv,0
+Results/static comparison,M1 TS-D-RLS ESR_mean_MAPE_percent,0.222188144681207,0.223280348154239,0.00109220347303199,percent,table_algorithm_static_comparison.csv,1
+Results/static comparison,M1 TS-D-RLS C_p95_percent,1.31818648710039,1.31818648710039,0,percent,table_algorithm_static_comparison.csv,0
+Results/static comparison,M1 TS-D-RLS ESR_p95_percent,0.696773537082202,0.700200160719177,0.00342662363697499,percent,table_algorithm_static_comparison.csv,1
+Results/static comparison,M1 TS-D-RLS convergence_cycles_mean,13.1888020833333,13.2109375,0.0221354166666998,cycles,table_algorithm_static_comparison.csv,1
+Results/static comparison,M2 TS-SLTVKE C_mean_MAPE_percent,0.301149059504354,0.301149059504354,0,percent,table_algorithm_static_comparison.csv,0
+Results/static comparison,M2 TS-SLTVKE ESR_mean_MAPE_percent,0.64283085961941,0.644627911791199,0.00179705217178905,percent,table_algorithm_static_comparison.csv,1
+Results/static comparison,M2 TS-SLTVKE C_p95_percent,1.10688368055481,1.10688368055481,0,percent,table_algorithm_static_comparison.csv,0
+Results/static comparison,M2 TS-SLTVKE ESR_p95_percent,2.48676389255558,2.49915946878208,0.0123955762265,percent,table_algorithm_static_comparison.csv,1
+Results/static comparison,M2 TS-SLTVKE convergence_cycles_mean,33.03515625,33.09375,0.05859375,cycles,table_algorithm_static_comparison.csv,1
+Results/static comparison,M3 Dual EKF C_mean_MAPE_percent,0.304340016733086,0.304340016733086,0,percent,table_algorithm_static_comparison.csv,0
+Results/static comparison,M3 Dual EKF ESR_mean_MAPE_percent,1.19225037349521,1.1938102815942,0.00155990809899009,percent,table_algorithm_static_comparison.csv,1
+Results/static comparison,M3 Dual EKF C_p95_percent,1.14919306233607,1.14919306233607,0,percent,table_algorithm_static_comparison.csv,0
+Results/static comparison,M3 Dual EKF ESR_p95_percent,3.8578529399109,3.86016113580213,0.0023081958912301,percent,table_algorithm_static_comparison.csv,1
+Results/static comparison,M3 Dual EKF convergence_cycles_mean,40.5703125,40.5794270833333,0.00911458333330017,cycles,table_algorithm_static_comparison.csv,1
+Results/noise timing,M1 TS-D-RLS F28379D 50ns C_p95_percent,0.496379709706086,0.496379709706086,0,percent,table_algorithm_noise_timing.csv,0
+Results/noise timing,M1 TS-D-RLS F28379D 50ns ESR_p95_percent,0.336897085804324,0.338547258158673,0.001650172354349,percent,table_algorithm_noise_timing.csv,1
+Results/noise timing,M2 TS-SLTVKE F28379D 50ns C_p95_percent,0.413164293943367,0.413164293943367,0,percent,table_algorithm_noise_timing.csv,0
+Results/noise timing,M2 TS-SLTVKE F28379D 50ns ESR_p95_percent,0.687748572145454,0.688769901804421,0.00102132965896695,percent,table_algorithm_noise_timing.csv,1
+Results/noise timing,M3 Dual EKF F28379D 50ns C_p95_percent,0.421092446694713,0.421092446694713,0,percent,table_algorithm_noise_timing.csv,0
+Results/noise timing,M3 Dual EKF F28379D 50ns ESR_p95_percent,1.91609444375762,1.9140506433096,-0.00204380044801988,percent,table_algorithm_noise_timing.csv,1
+Results/abrupt stress,TS-SLTVKE C_abrupt legacy tail error,19.2910996372035,19.2910996372035,0,percent,table_algorithm_abrupt_step.csv,0
+Results/abrupt stress,TS-SLTVKE ESR_abrupt legacy tail error,49.937918328659,49.9384081709349,0.00048984227589699,percent,table_algorithm_abrupt_step.csv,1
+Results/ramp table,M1 TS-D-RLS 0.1s combined nRMSE,0.116091249848972,0.116078750701157,-1.24991478146763e-05,dimensionless,table_algorithm_ramp_tracking.csv,1
+Results/ramp table,M1 TS-D-RLS 0.1s normalized lag,8.05333333333333,8.05333333333333,0,percent,table_algorithm_ramp_tracking.csv,0
+Results/ramp table,M2 TS-SLTVKE 0.1s combined nRMSE,0.215947425153245,0.216018072126826,7.06469735816395e-05,dimensionless,table_algorithm_ramp_tracking.csv,1
+Results/ramp table,M2 TS-SLTVKE 0.1s normalized lag,22.0266666666667,22.0266666666667,0,percent,table_algorithm_ramp_tracking.csv,0
+Results/ramp table,M1 TS-D-RLS 1s combined nRMSE,0.0163523071947704,0.0163425347265779,-9.77246819247601e-06,dimensionless,table_algorithm_ramp_tracking.csv,1
+Results/ramp table,M1 TS-D-RLS 1s normalized lag,1.36,1.36,0,percent,table_algorithm_ramp_tracking.csv,0
+Results/ramp table,M2 TS-SLTVKE 1s combined nRMSE,0.0453222680722978,0.045396125558977,7.38574866791866e-05,dimensionless,table_algorithm_ramp_tracking.csv,1
+Results/ramp table,M2 TS-SLTVKE 1s normalized lag,3.53733333333333,3.53733333333333,0,percent,table_algorithm_ramp_tracking.csv,0
+Results/ramp table,M1 TS-D-RLS 10s combined nRMSE,0.0159398575777352,0.0159553505936361,1.5493015900897e-05,dimensionless,table_algorithm_ramp_tracking.csv,1
+Results/ramp table,M1 TS-D-RLS 10s normalized lag,1.75186666666667,1.75186666666667,0,percent,table_algorithm_ramp_tracking.csv,0
+Results/ramp table,M2 TS-SLTVKE 10s combined nRMSE,0.0453302631963649,0.0455693765979006,0.000239113401535707,dimensionless,table_algorithm_ramp_tracking.csv,1
+Results/ramp table,M2 TS-SLTVKE 10s normalized lag,4.49213333333333,4.49213333333333,0,percent,table_algorithm_ramp_tracking.csv,0
+Results/ramp table,M1 TS-D-RLS 100s combined nRMSE,0.0212728445826204,0.0213086035097966,3.57589271761799e-05,dimensionless,table_algorithm_ramp_tracking.csv,1
+Results/ramp table,M1 TS-D-RLS 100s normalized lag,2.82744,2.82744,0,percent,table_algorithm_ramp_tracking.csv,0
+Results/ramp table,M2 TS-SLTVKE 100s combined nRMSE,0.0475716079852748,0.0477498098079983,0.000178201822723434,dimensionless,table_algorithm_ramp_tracking.csv,1
+Results/ramp table,M2 TS-SLTVKE 100s normalized lag,4.8678,4.8678,0,percent,table_algorithm_ramp_tracking.csv,0
+Results/operating transients,M1 TS-D-RLS mean peak_false_C_percent,1.30167117820988,1.30167117820988,0,percent,table_algorithm_operating_transients.csv,0
+Results/operating transients,M1 TS-D-RLS mean peak_false_ESR_percent,1.84290416421235,1.84741176893197,0.00450760471961442,percent,table_algorithm_operating_transients.csv,1
+Results/operating transients,M2 TS-SLTVKE mean peak_false_C_percent,0.757002151166472,0.757002151166472,0,percent,table_algorithm_operating_transients.csv,0
+Results/operating transients,M2 TS-SLTVKE mean peak_false_ESR_percent,5.17352944524081,5.19192919714166,0.0183997519008505,percent,table_algorithm_operating_transients.csv,1
+Results/uncertainty,M1 TS-D-RLS joint 95 coverage,13,13,0,percent,table_algorithm_uncertainty.csv,0
+Results/uncertainty,M2 TS-SLTVKE joint 95 coverage,89.0625,88.9322916666667,-0.1302083333333,percent,table_algorithm_uncertainty.csv,1
+Results/uncertainty,M3 Dual EKF joint 95 coverage,81.9010416666667,81.9010416666667,0,percent,table_algorithm_uncertainty.csv,0

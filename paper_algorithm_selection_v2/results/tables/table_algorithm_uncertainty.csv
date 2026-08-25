@@ -1,0 +1,4 @@
+method,uncertainty_type,C_95_coverage_percent,ESR_95_coverage_percent,joint_95_coverage_percent,calibration_status,extra_multiplications_per_frame,point_estimate_unchanged,notes
+M1 TS-D-RLS,Residual-weighted information inverse with sandwich maximum,55.5,20,13,under-covered,8192,1,Auxiliary diagnostic; never feeds back into RLS estimate.
+M2 TS-SLTVKE,Frozen Joseph covariance / parameter CI,99.4791666666667,89.453125,88.9322916666667,practically calibrated,0,1,Frozen covariance readout; no adaptive Q or change detector.
+M3 Dual EKF,Frozen Joseph covariance / parameter CI,99.3489583333333,82.5520833333333,81.9010416666667,indicative only,0,1,Frozen covariance readout; no adaptive Q or change detector.

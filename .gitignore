@@ -18,3 +18,7 @@ verification_v22/results/**/*.mat
 # Local caches and temporary data
 .cache/
 *.tmp
+
+# Run-local MATLAB preferences and duplicated review exports
+**/logs/matlab_prefs/
+**/gpt_review_package/

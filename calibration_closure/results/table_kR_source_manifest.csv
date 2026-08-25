@@ -1,0 +1,9 @@
+role,source_file,script_function_or_variable
+calibration implementation,D:\PROJECT\AI_PROJECT\CukCapacitorHealthIdentification\verification_v21\covariance\train_v21_covariance.m,"calibrate_edge_gain/training_cases"
+reference parameter source,D:\PROJECT\AI_PROJECT\CukCapacitorHealthIdentification\cuk_cap_health_verification\model\model_parameters.m,"p.ESR"
+Model-A calibration plant,D:\PROJECT\AI_PROJECT\CukCapacitorHealthIdentification\cuk_cap_health_verification\model\simulate_switched_equation.m,"simulate_switched_equation"
+Model-B calibration plant,D:\PROJECT\AI_PROJECT\CukCapacitorHealthIdentification\verification_v21\model\run_modelB_v21.m,"run_modelB_v21"
+measurement chain,D:\PROJECT\AI_PROJECT\CukCapacitorHealthIdentification\verification_v21\sampling\v21_measurement_chain.m,"v21_measurement_chain"
+edge reconstruction,D:\PROJECT\AI_PROJECT\CukCapacitorHealthIdentification\verification_v2\timing\v2_edge_estimates.m,"ESR_raw_Ohm,y_R_V,i_sum_A"
+archived locked output,D:\PROJECT\AI_PROJECT\CukCapacitorHealthIdentification\verification_v21\results\raw\locked_covariance_v21.mat,"locked.edgeGainCorrection"
+final algorithm config,D:\PROJECT\AI_PROJECT\CukCapacitorHealthIdentification\paper_algorithm_selection_v1\scripts\paper_algorithm_selection_engine.m,"cfg.kRCalibration"

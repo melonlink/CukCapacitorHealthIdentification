@@ -1,0 +1,20 @@
+file,line_or_variable,value,context,input_or_output,derived_or_hardcoded,date/version,used_by_final_results
+paper_algorithm_selection_v1/scripts/paper_algorithm_selection_engine.m,line 87,0.982,cfg.kRCalibration central value,input,hardcoded,algorithm selection v1,yes dynamic final campaign
+paper_verification_v11/scripts/paper_verification_v11_engine.m,line 266,0.982,kRtrue center with 0.006 seed modulation,input,hardcoded,paper verification v1.1,yes static factorial
+paper_verification_v11/scripts/paper_verification_v11_engine.m,line 747,0.982,selected dynamic generator kRtrue,input,hardcoded,paper verification v1.1,yes selected dynamic
+paper_verification_v1/scripts/paper_verification_engine.m,line 198,0.982,kRtrue center with 0.006 seed modulation,input,hardcoded,paper verification v1,yes
+paper_verification_v1/scripts/paper_verification_engine.m,line 768,0.982,physical information-row hR scale,input,hardcoded,paper verification v1,indirect
+manuscript_v025/source_traceability/PARAMETER_SOURCE_MATRIX.csv,line 21 / PAR-020,0.982,k_R parameter trace,trace output,locked trace,manuscript v0.25,no
+manuscript_v025/source_traceability/KR_COMMISSIONING_TRACE.md,line 22,0.982,final algorithm package lock statement,trace output,manuscript-only,manuscript v0.25,no
+manuscript_v025/source_traceability/KR_COMMISSIONING_TRACE.md,line 24,0.982,missing calibration-export statement,trace output,manuscript-only,manuscript v0.25,no
+manuscript_v025/source_traceability/KR_COMMISSIONING_TRACE.md,line 27,0.982,non-equivalence statement,trace output,manuscript-only,manuscript v0.25,no
+manuscript_v025/source_traceability/KR_COMMISSIONING_TRACE.md,line 36,0.982,device-stage provenance limitation,trace output,manuscript-only,manuscript v0.25,no
+manuscript_v025/source_traceability/CLAIM_SOURCE_MATRIX.csv,line 40 / CLM-039,0.982,fixed-before-blind claim,trace output,locked trace,manuscript v0.25,no
+manuscript_v025/source_traceability/CLAIM_SOURCE_MATRIX.csv,line 51 / CLM-050,0.982,comparison against v2.1 output,trace output,manuscript-only,manuscript v0.25,no
+manuscript_v025/sections/03_observation_framework.tex,line 34,0.982,frozen paper coefficient and missing export statement,manuscript-only,manuscript-only,manuscript v0.25,no
+manuscript_v025/sections/02_modeling.tex,line 93,0.982,converter and identification parameter table,manuscript-only,manuscript-only,manuscript v0.25,no
+manuscript_v025/README.md,line 31,0.982,package limitation statement,documentation,manuscript-only,manuscript v0.25,no
+manuscript_v025/MANUSCRIPT_V025_CHANGELOG.md,line 8 / V025-02,0.982,calibration issue record,audit output,manuscript-only,manuscript v0.25,no
+manuscript_v025/MANUSCRIPT_V025_AUDIT.md,line 10,0.982,open provenance blocker description,audit output,manuscript-only,manuscript v0.25,no
+manuscript_v025/MANUSCRIPT_V025_AUDIT.md,line 12,0.982,required closure item,audit output,manuscript-only,manuscript v0.25,no
+manuscript_v025/MANUSCRIPT_V025_AUDIT.md,line 21,0.982,unchecked exact provenance item,audit output,manuscript-only,manuscript v0.25,no

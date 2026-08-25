@@ -1,0 +1,8 @@
+metric,mode,pair_count,bootstrap_count,mean_paired_difference_M1_minus_M2,median_paired_difference_M1_minus_M2,CI95_low,CI95_high,fraction_M1_better,fraction_M2_better,interpretation
+C static MAPE,Native,768,10000,0.071531402774508,0.0274452965732641,0.0501868563144335,0.0938960311804984,0.388020833333333,0.611979166666667,Negative favors M1; no arbitrary weighted score.
+ESR static MAPE,Native,768,10000,-0.421347563636961,-0.170055693304943,-0.496921209451434,-0.352010662969918,0.774739583333333,0.225260416666667,Negative favors M1; no arbitrary weighted score.
+Static convergence,Native,768,10000,-19.8828125,0,-29.1784830729167,-11.4856770833333,0.352864583333333,0.171875,Negative favors M1; no arbitrary weighted score.
+Combined ramp nRMSE,Native,12,10000,-0.0462620361401336,-0.029880278041569,-0.0996536980708446,-0.00257894560117541,0.75,0.25,Negative favors M1; no arbitrary weighted score.
+Ramp normalized lag percent,Native,12,10000,-5.23282333333333,-2.83318,-10.726414,-0.737776666666665,0.75,0.25,Negative favors M1; no arbitrary weighted score.
+Combined ramp nRMSE,Equal-Report,12,10000,-0.0584542276798977,-0.0310364558681604,-0.135638164024518,0.000594927818432821,0.75,0.25,Negative favors M1; no arbitrary weighted score.
+Ramp normalized lag percent,Equal-Report,12,10000,1.64533,-1.08486,-2.599725,8.76455833333333,0.5,0.166666666666667,Negative favors M1; no arbitrary weighted score.

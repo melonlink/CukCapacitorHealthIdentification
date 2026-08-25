@@ -1,0 +1,3 @@
+projection_state,N_seeds,C_MAPE_percent,ESR_MAPE_percent,mean_C_covariance,mean_ESR_covariance,divergence_rate,projection_activation_fraction
+ON,200,0.0663546157926262,0.179245807434297,2.00202307052151e-14,5.69970343987419e-08,0,0
+OFF,200,0.0663546157926262,0.179245807434297,2.00202307052151e-14,5.69970343987419e-08,0,0

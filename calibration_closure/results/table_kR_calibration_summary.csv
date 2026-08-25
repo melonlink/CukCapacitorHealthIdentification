@@ -1,0 +1,2 @@
+kR_reproduced_full,kR_archived_v21_full,absolute_error_vs_archived,exact_archived_match,kR_reproduced_rounded_3,kR_final_algorithm_config,rounded_matches_final,delta_vs_final_fraction,approx_ESR_scale_impact_fraction,raw_sample_count,accepted_sample_count,classification
+0.977198025945507,0.977198025945507,0,1,0.977,0.982,0,-0.00488999394551189,0.00488999394551189,588,588,KR_VERSION_DRIFT
