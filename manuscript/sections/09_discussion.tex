@@ -1,0 +1,29 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why Observation Design Matters}
+
+The O0--O1 factorial separates observation design from estimator complexity: with the RLS kernel unchanged, O1 reduces both MAPE values and the convergence time by the factors reported in Section~\ref{sec:results}. This attribution agrees with the circuit physics: the switching edge exposes the ESR drop, while the in-state charge balance exposes inverse capacitance. More elaborate recursion cannot reliably compensate for observations that mix these effects or compare mismatched timestamps.
+
+The scoped literature matrix contains no disclosed method combining the \Cuk{} transfer-capacitor target, $+i_{L1}\leftrightarrow-i_{L2}$ commutation, timestamp-reconstructed edge information, and direction-specific charge/edge updates. This is a bounded review finding, not a universal first-in-literature claim.
+
+\subsection{Why \TSSRKE{} Is Primary and What \TSRLS{} Retains}
+
+\TSSRKE{} satisfies all four predeclared primary criteria: it reproduces its Kalman parent digit for digit on every static, noise/timing, and operating-transient row (zero supervisor firings outside genuine health changes), keeps the parent's $88.93\%$ simultaneous coverage, near the $\approx90.25\%$ independence benchmark, and settles abrupt health steps within a fraction of one reporting interval where the parent freezes and the RLS baseline needs an order of magnitude longer. The supervisor thus removes the single disqualifying failure of the calibrated realization at four extra multiplications per row. The choice does not imply universal superiority: \TSRLS{} retains the lowest static ESR error, the fastest native convergence, the better aggregate ramp tracking at every duration, and the lowest cost, and it remains the recommended realization when only point tracking under smooth degradation is required. Dual EKF settles the ESR step faster because it carries no gate, but its uncalibrated coverage and worst false-ESR transients keep it excluded. The two retained realizations are thus complementary---\TSRLS{} as the lightweight practical estimator and \TSSRKE{} as the uncertainty-aware abrupt-change extension. The minimal supervised closed-loop check of Section~\ref{sec:results} shows zero false supervisor firings under regulator transients and sub-millisecond recovery of abrupt steps under feedback.
+
+\subsection{Limitations}
+
+The evidence has seven principal boundaries.
+\begin{enumerate}
+\item Identifiability and updates require valid CCM; DCM and weak-excitation intervals hold the estimate, with availability quantified toward the light-load boundary in Section~\ref{sec:results}. The method assumes availability of both inductor currents; applications lacking either measurement require an additional sensor or independently validated current reconstruction.
+\item The reported ESR is an effective condition indicator at the modeled switching, thermal, and frequency conditions, not a temperature-independent aging variable. In deployment, temperature-induced ESR variation can exceed the identification error reported here; health trending therefore requires thermally matched comparisons or a mapping to a reference temperature $r_C(T_{\mathrm{ref}})$, which the simulation scope of this work does not establish.
+\item The $0.1$--$100$~s trajectories are synthetic or trace-derived bandwidth tests, not run-to-failure data; abrupt discontinuities are recovery stress tests rather than aging events.
+\item Hardware validation remains open for edge ringing, isolation/probing, AFE common-mode rejection, and production calibration.
+\item The F28379D study is device-realistic simulation; target compilation and measured WCET have not been demonstrated.
+\item The supervisor resolves the abrupt-recovery side of the former tracking--confidence tradeoff, but \TSRLS{} still tracks smooth ramps better and the auxiliary \TSRLS{} intervals remain under-covered; the supervisor's components are classical, and its constants, while predeclared and shared across all cases, were designed against the evaluated disturbance classes.
+\item The closed-loop and light-load supplements use the Model-A plant with one noise seed per case and one deliberately simple PI regulator; the supervised closed-loop check shares these limits. They do not evaluate controller-interaction breadth or DCM-mode operation.
+\end{enumerate}
+
+\subsection{Experimental Roadmap}
+
+The next stage should use a controlled C/ESR network in the energy-transfer branch, the specified F28379D schedule, separate absolute- and edge-voltage paths, and synchronized inductor-current measurements. Tests should sweep input voltage, duty ratio, load, and temperature; characterize ringing and AFE rejection; verify calibration against offline impedance measurements; and measure WCET before firmware release.

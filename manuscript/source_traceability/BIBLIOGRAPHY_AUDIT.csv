@@ -1,0 +1,30 @@
+﻿bib_key,doi_or_identifier,metadata_source,verified_date,verified_fields,status,note
+dang2020review,10.3390/s20133740,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;article",VERIFIED,"Corrects v0.1 author misattribution: Crossref lists Dang and Kwak"
+nathan2023review,10.1016/j.microrel.2023.115003,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;article",VERIFIED,
+hasegawa2018dclink,10.1016/j.microrel.2018.07.023,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;pages",VERIFIED,
+yao2015buck,10.1109/TPEL.2014.2383436,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,
+barbulescu2022observer,10.3390/app12104891,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;article",VERIFIED,
+barbulescu2023implementation,10.3390/s23020948,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;article",VERIFIED,
+caiman2024quasionline,10.3390/app142210756,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;article",VERIFIED,recent-reference check
+ribeiro2025inherent,10.1109/JAS.2025.125159,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,recent-reference check
+ribeiro2024injection,10.1016/j.compeleceng.2024.109577,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;article",VERIFIED,recent-reference check
+ribeiro2023wavelet,10.1016/j.ijepes.2023.109141,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;article",VERIFIED,
+amaral2024waveletkf,10.3390/electronics13163265,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;article",VERIFIED,recent-reference check
+zhang2025haar,10.3390/electronics14234671,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;article",VERIFIED,recent-reference check
+reichbach2016rls,10.1109/TEC.2016.2521324,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,"Corrects v0.1 abbreviated authorship"
+naseri2017banks,10.1049/iet-est.2017.0013,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,
+chen2018vffrls,10.1051/matecconf/201816001001,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;article",VERIFIED,
+ahmeid2017selftuned,10.1109/TPEL.2016.2606417,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,
+wang2020startup,10.1109/TPEL.2019.2956808,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,
+abokhalil2020obl,10.3390/su12093719,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;article",VERIFIED,
+tang2019sensorless,10.1049/joe.2018.8596,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,
+prathiba2023cuk,10.1109/ICEMCE57940.2023.10434223,Crossref DOI record,2026-08-23,"title;authors;full conference;date;pages",VERIFIED,"ICEMCE expanded as International Conference on Energy, Materials and Communication Engineering; pp. 1-5"
+ajra2024sensorfault,10.1016/j.ifacol.2024.07.245,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,recent-reference check
+samie2015prognostic,10.1109/TPEL.2014.2376413,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;pages",VERIFIED,
+wang2021fractionalcuk,10.3390/electronics10060710,Crossref DOI record,2026-08-23,"title;authors;venue;year;volume;issue;article",VERIFIED,
+jazwinski1970filtering,"ISBN 9780123815506",authoritative monograph record,2026-08-23,"author;title;publisher;year",VERIFIED_CLASSIC,
+anderson1979optimal,"ISBN 9780136381228",authoritative monograph record,2026-08-23,"authors;title;publisher;year",VERIFIED_CLASSIC,
+leong2025boostesr,10.1109/TPEL.2024.3470814,"IEEE Xplore DOI record; Crossref-indexed records",2026-08-23,"title;authors;venue;year;volume;issue;pages;DOI",VERIFIED_LATEST_NEIGHBOR,"IEEE TPEL 40(1):2196-2209; current-sensorless Boost ESR"
+zhang2025injection,10.1109/JESTPE.2024.3399239,"IEEE author PDF; Crossref-indexed record",2026-08-23,"title;authors;venue;year;volume;issue;pages;DOI",VERIFIED_LATEST_NEIGHBOR,"IEEE JESTPE 13(1):771-784; injection-based Buck capacitance"
+zhang2025largesignal,10.1109/OJPEL.2025.3554275,"IEEE author PDF; Crossref-indexed record",2026-08-23,"title;authors;venue;year;volume;pages;DOI",VERIFIED_LATEST_NEIGHBOR,"IEEE OJPEL 6:647-659; current-sensorless large-signal C/ESR"
+

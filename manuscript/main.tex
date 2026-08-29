@@ -1,0 +1,53 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{array}
+
+\graphicspath{{figures/}}
+\input{macros}
+
+\title{Topology-Synchronous Decoupled Observations and Supervised-Reset
+Estimation for Online C--ESR Monitoring of the \Cuk\ Energy-Transfer
+Capacitor}
+
+\author{Anonymous Author(s)}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The energy-transfer capacitor in a \Cuk\ converter is a reliability-critical power-transfer element, but ripple measurements couple its capacitance and equivalent series resistance (ESR). This paper proposes topology-synchronous, direction-decoupled observations that exploit the current commutation between $+i_{L1}$ and $-i_{L2}$ without diagnostic injection: timestamped fits in guarded edge windows reconstruct an ESR-dominant discontinuity, and in-state charge integration yields a capacitance-dominant row. Positive finite-window information bounds establish local identifiability under valid continuous-conduction-mode conditions. On these observations, a supervised-reset Kalman estimator (\TSSRKE) augments the Joseph-form kernel with a predeclared two-time-scale supervisor over accepted and gate-rejected innovations, restoring gain after abrupt health changes without disturbing interval calibration. Evaluation covers 48 blind cases across four noise profiles and four timing skews, with abrupt-step, degradation-ramp, and TMS320F28379D device-realistic scenarios. Simulation results show that the proposed observations alone reduce mean capacitance error from $7.0366\%$ to $0.3727\%$ with the RLS kernel unchanged, and that \TSSRKE\ attains $0.3011\%/0.6446\%$ capacitance/ESR error with $88.93\%$ joint coverage while reproducing its parent exactly in steady state. Abrupt capacitance and ESR steps are settled within $1.52$ and $0.48$~ms, where the unsupervised kernel does not recover; worst 95th-percentile errors of $1.6425\%/2.6109\%$ support device-realistic feasibility under the modeled DSP constraints.
+\end{abstract}
+
+\begin{IEEEkeywords}
+\Cuk\ converter, capacitor condition monitoring, change detection, energy-transfer capacitor, capacitance estimation, equivalent series resistance, Kalman filters, parameter identification, power electronics reliability.
+\end{IEEEkeywords}
+
+\input{sections/01_introduction}
+\input{sections/02_modeling}
+\input{sections/03_observation_framework}
+\input{sections/04_identifiability}
+\input{sections/05_estimators}
+\input{sections/06_verification_protocol}
+\input{sections/07_results}
+\input{sections/08_device_realistic}
+\input{sections/09_discussion}
+\input{sections/10_conclusion}
+
+\appendices
+\input{sections/appendix_a_equations}
+\input{sections/appendix_b_covariance}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

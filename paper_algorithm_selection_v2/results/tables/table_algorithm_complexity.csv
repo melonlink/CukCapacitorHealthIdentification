@@ -1,4 +1,0 @@
-method,state_dimension,scalar_divisions_per_observation,multiplications_per_observation,additions_per_observation,memory_scalars,estimated_execution_us_per_observation,accepted_observations_per_frame,multiplications_per_frame,additions_per_frame,estimated_execution_ms_per_frame,memory_bytes_float32,health_frame_ms,source
-M1 TS-D-RLS,2,1,28,20,22,1.36,1024,28672,20480,1.39264,88,20.48,Frozen Paper Verification v1 operation-count model
-M2 TS-SLTVKE,3,1,46,34,31,2.12,1024,47104,34816,2.17088,124,20.48,Frozen Paper Verification v1 operation-count model
-M3 Dual EKF,3,2,62,47,40,3.05,1024,63488,48128,3.1232,160,20.48,Frozen Paper Verification v1 operation-count model

@@ -1,0 +1,63 @@
+\section{Online Estimation: Kernels and the Supervised-Reset Realization}
+\label{sec:estimators}
+
+All realizations in this section consume the same accepted edge and charge rows from Section~\ref{sec:observations}, separating observation effects from recursive-kernel effects. The two kernel baselines are presented first, their tracking--confidence tradeoff is isolated, and the supervised-reset realization follows.
+
+\subsection{Kernel Baselines}
+\label{sec:kernels}
+
+The lightweight baseline \TSRLS{}---a topology-synchronous direction-decoupled RLS---uses one scalar RLS recursion per health direction. For direction $j\in\{C,R\}$, an accepted row $z_{j,k}=h_{j,k}\theta_{j,k}+\nu_{j,k}$ updates
+\begin{align}
+K_{j,k}&=\frac{P_{j,k-1}h_{j,k}}
+{\lambda+h_{j,k}^{2}P_{j,k-1}},
+\label{eq:rls_gain}\\
+\hat\theta_{j,k}&=\hat\theta_{j,k-1}
++K_{j,k}(z_{j,k}-h_{j,k}\hat\theta_{j,k-1}),
+\label{eq:rls_state}\\
+P_{j,k}&=\lambda^{-1}(P_{j,k-1}-K_{j,k}h_{j,k}P_{j,k-1}),
+\label{eq:rls_cov}
+\end{align}
+with the predeclared forgetting factor $\lambda=0.9975$; a larger $\lambda$ smooths the estimate at the cost of a longer settling time. Only the direction associated with an accepted observation is updated, validity gating rejects rows that fail the predeclared acceptance rules, and projection enforces the physical parameter intervals. The reported health values are $\hat C=C_b/\hat\alphab$ and $\widehat{\ESR}=\hat r_C$.
+
+The Kalman kernel \TSKF{}---a topology-synchronous scalar linear-time-varying (LTV) Kalman estimator---maintains the structured state $\vect{x}_k=[v_{C,k}\;\alphab_k\;r_{C,k}]^{\mathsf T}$ with the charge-driven transition
+\begin{equation}
+\vect{F}_k=
+\begin{bmatrix}
+1&q_k/C_b&0\\0&1&0\\0&0&1
+\end{bmatrix},
+\label{eq:kf_transition}
+\end{equation}
+The structured measurement directions $\vect{H}_V=[1,0,0]$, $\vect{H}_C=[0,q/C_b,0]$, and $\vect{H}_R=[0,0,k_RI_\Sigma]$ enter scalar Joseph-form covariance updates with predeclared process and measurement covariances, and NIS gating uses the predeclared gate $\gamma=9$. The posterior covariance provides calibrated interval reporting. Both kernels are standard recursions \cite{jazwinski1970filtering,anderson1979optimal}; neither is claimed as a novelty, and the TS- names denote only their topology-synchronous, direction-specific use.
+
+\subsection{The Tracking--Confidence Tradeoff of the Unsupervised Kernels}
+\label{sec:tradeoff}
+
+The two kernels fail in complementary ways. The RLS baseline tracks and recovers quickly, but its auxiliary residual-weighted interval is uncalibrated (13.00\% joint coverage in Section~\ref{sec:results}). The Kalman kernel reports near-nominal simultaneous coverage (88.93\%), but after an abrupt health change every innovation exceeds the NIS gate, the update is rejected, the covariance stays small, and the estimate freezes at the stale value---the retained negative result of the unsupervised realization. The mechanism also identifies the missing information: the gate-rejected innovations, which the point update discards, carry the sustained same-sign evidence of a parameter change.
+
+\subsection{Primary Realization: Supervised-Reset Estimator \TSSRKE{}}
+\label{sec:srke}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics{fig03_estimation_loop.pdf}
+\caption{The complete supervised estimation loop: per-cycle features from the sensed converter waveforms form the two observation rows; the validity gates of~\eqref{eq:gates} admit valid rows; the innovation $\varepsilon$ is built from the fed-back estimate $\hat\theta$ and screened by the NIS gate, and accepted rows update the structured Joseph kernel. The two-time-scale supervisor watches \emph{every} valid $\varepsilon$---accepted or NIS-rejected---restoring gain by a per-direction covariance reset after a sustained shift; rows failing the validity gates produce no innovation and hold the estimate.}
+\label{fig:loop}
+\end{figure*}
+
+\TSSRKE{} augments the Kalman kernel with a per-direction supervisor that closes the loop shown in Fig.~\ref{fig:loop}. The supervisor watches the clipped normalized innovation of \emph{every} valid row, accepted or rejected,
+\begin{equation}
+\varepsilon_{j,k}=\operatorname{clip}\!\left(\frac{z_{j,k}-h_{j,k}\hat\theta_{j,k-1}}{\sqrt{S_{j,k}}},\pm c\right),
+\quad S_{j,k}=h_{j,k}^2P_{j}+R_{j,k}.
+\label{eq:eps}
+\end{equation}
+Two exponentially weighted means (EWMA) with separated time scales,
+\begin{equation}
+\begin{aligned}
+m^{\mathrm f}_{j}&\leftarrow m^{\mathrm f}_{j}+a_{\mathrm f}\,(\varepsilon_{j,k}-m^{\mathrm f}_{j}),\\
+m^{\mathrm s}_{j}&\leftarrow m^{\mathrm s}_{j}+a_{\mathrm s}\,(\varepsilon_{j,k}-m^{\mathrm s}_{j}),
+\end{aligned}
+\label{eq:twoscale}
+\end{equation}
+act as the current innovation level and its bias reference. When $|m^{\mathrm f}_{j}-m^{\mathrm s}_{j}|>\tau$, the supervisor resets that direction's covariance to its initialization value, re-anchors $m^{\mathrm f}_{j}\leftarrow m^{\mathrm s}_{j}$, and holds off for $N_{\mathrm h}$ valid rows; arming requires an $N_{\mathrm w}$-row learning window per direction. All constants are predeclared and shared by both directions: $a_{\mathrm f}=1/16$ and $a_{\mathrm s}=1/128$ (an eightfold time-scale separation), $\tau=2.5$, $c=6$, $N_{\mathrm w}=N_{\mathrm h}=32$.
+
+The two-time-scale form is deliberate. Residual timing skew leaves a deterministic, near-periodic disturbance in the edge row whose $\sigma$-normalized amplitude grows as noise shrinks; a plain CUSUM misfires on it, whereas the fast filter attenuates the zero-mean disturbance below $\tau$ while a sustained parameter-change shift crosses it within a few valid rows. After a reset the Kalman gain is restored, the estimate re-converges as from initialization, and the reported interval widens and then re-tightens, consistent with the increased post-change uncertainty. The supervisor adds four multiplications and about seven additions/comparisons per valid row to the kernel. Its components---EWMA residual filtering, change supervision, and covariance resetting---are classical \cite{page1954cusum,mehra1970adaptive,willsky1976survey,gustafsson2000adaptive}; the contribution is their direction-specific construction on the gated topology-synchronous rows.

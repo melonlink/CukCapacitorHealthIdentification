@@ -1,0 +1,109 @@
+﻿\section{Energy-Transfer Capacitor Model and Health Signatures}
+\label{sec:modeling}
+
+\subsection{Topology, States, and Sign Convention}
+
+Consider the classical inverting \Cuk{} converter in continuous conduction mode (CCM), shown in Fig.~\ref{fig:two_states}(a); Table~\ref{tab:notation} summarizes the principal notation. The state vector is
+\begin{equation}
+\vect{x}=\begin{bmatrix}i_1&i_2&v_C&v_o\end{bmatrix}^{\mathsf T},
+\label{eq:state_vector}
+\end{equation}
+where $i_1=i_{L1}>0$ and $i_2=i_{L2}>0$ follow their usual inductor-current directions, $v_C$ is the internal voltage of the ideal element in the energy-transfer capacitor, and $v_o>0$ is the magnitude of the physically negative output voltage. Let $u\in\{0,1\}$ denote the main-switch state, with $u=1$ for the on-state.
+
+The transfer-capacitor current is
+\begin{equation}
+i_C=(1-u)i_1-ui_2,
+\label{eq:ic_unified}
+\end{equation}
+and therefore, matching the two switch topologies in Fig.~\ref{fig:two_states}(b) and~(c),
+\begin{equation}
+u=0:\ i_C=i_1, \qquad u=1:\ i_C=-i_2.
+\label{eq:ic_states}
+\end{equation}
+Equation~\eqref{eq:ic_unified} is the topology-specific reconstruction used throughout this work; it avoids a dedicated series current sensor in the capacitor branch when the switching state and both inductor currents are available.
+
+\subsection{Nonideal Capacitor Port}
+
+The first-order capacitor model consists of an ideal capacitance $C$ in series with the ESR $r_C$:
+\begin{equation}
+v_T=v_C+r_C i_C, \qquad \dot v_C=\frac{i_C}{C},
+\label{eq:cap_port}
+\end{equation}
+where $v_T$ is the externally measured terminal voltage. Equating $v_T$ with $v_C$ would attribute the ESR drop to the ideal capacitance and couple the two health indicators.
+
+For numerical conditioning, a fixed nominal capacitance $C_b$ defines
+\begin{equation}
+\alphab=\frac{C_b}{C}, \qquad C=\frac{C_b}{\alphab}.
+\label{eq:alpha_definition}
+\end{equation}
+The health-parameter vector is $\vect{\theta}=[\alphab,r_C]^{\mathsf T}$.
+
+\begin{table}[t]
+\caption{Principal Notation}
+\label{tab:notation}
+\centering
+\footnotesize
+\begin{tabular}{ll}
+\toprule
+Symbol & Meaning \\
+\midrule
+$u,D,T_s$ & switch state, duty ratio, switching period \\
+$i_1,i_2$ & input- and output-inductor currents \\
+$i_C$ & reconstructed energy-transfer-capacitor current \\
+$v_C,v_T$ & ideal internal and measured terminal voltages \\
+$C,C_b$ & actual and fixed nominal capacitances \\
+$r_C$ & capacitor ESR at the measurement conditions \\
+$\alphab$ & normalized inverse capacitance, $C_b/C$ \\
+$q$ & charge transferred inside an accepted window \\
+$I_\Sigma$ & edge-current sum, $i_1+i_2$ \\
+$k_R$ & training-calibrated gain held fixed during estimation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Health Scope}
+
+Capacitance loss and ESR growth are treated as condition indicators, not as remaining-useful-life predictions. Because $r_C$ depends on temperature, frequency, operating point, and aging, the method estimates effective ESR under the specified switching and acquisition conditions. The theory assumes recurring valid CCM windows, negligible parameter change within an identification window, and a first-order series C--ESR model. The constancy assumption is mild because an identification window spans tens of milliseconds whereas wear-out drift evolves over weeks to months \cite{wang2014reliability}; the abrupt-change scenarios of Section~\ref{sec:results} probe its violation directly. Equivalent series inductance (ESL), ringing, discontinuous conduction mode (DCM), and front-end nonidealities are addressed through safe-window selection, calibration, gating, or explicit limitations.
+
+Only inverse capacitance is normalized: $\alphab=C_b/C$ is dimensionless, whereas $r_C$ is estimated directly in ohms. Separate scalar recursions and physical bounds avoid mixing their numerical scales. The predeclared ESR interval is $0.35r_b\le r_C\le2.50r_b$, or 17.5--125~m$\Omega$ for $r_b=50$~m$\Omega$. The converter and identification parameters used throughout the evaluation are listed in Table~\ref{tab:converter_parameters}.
+
+The identification uses the terminal voltage, both inductor-current measurements, and the switching state with synchronized timestamps; applications lacking either inductor-current measurement are addressed in Section~\ref{sec:discussion}. The following section converts these measurements into decoupled health information.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{fig01_cuk_topology.pdf}
+\caption{Classical inverting \Cuk{} converter and adopted current/voltage signs: (a) full power stage; (b) $u=0$ topology with $i_C=+i_1$; (c) $u=1$ topology with $i_C=-i_2$. The ideal capacitor voltage $v_C$ is continuous at a transition, while the terminal voltage $v_T=v_C+r_Ci_C$ contains the ESR step.}
+\label{fig:two_states}
+\end{figure*}
+
+\begin{table}[t]
+\caption{Converter and Identification Parameters}
+\label{tab:converter_parameters}
+\centering
+\footnotesize
+\begin{tabular}{p{2.35cm}p{4.25cm}}
+\toprule
+Item & Value \\
+\midrule
+Input voltage & $V_{\mathrm{in}}=24$~V nominal; $19.2/24/28.8$~V blind range \\
+Duty ratio & $D=0.40$ nominal; $0.30/0.40/0.55/0.65$ blind range \\
+Switching frequency & $f_s=50$~kHz ($T_s=20$~\si{\micro\second}) \\
+Inductors & $L_1=L_2=500$~\si{\micro\henry} \\
+Capacitors & $C_b=100$~\si{\micro\farad}; $C_o=470$~\si{\micro\farad} \\
+Nominal ESR/load & $r_b=50$~m$\Omega$; $R=10~\Omega$ \\
+Primary recursion & $\lambda=0.9975$; $P_0=1000$ \\
+Edge calibration & $k_R=0.9772$; training-calibrated nominal value; case-specific calibrated value used in evaluation \\
+C charge window & $T_{w,C}=2.0$~\si{\micro\second} \\
+ESR edge-fit window & $T_{w,R}=2.2$~\si{\micro\second} in the F28379D realization \\
+Health reporting & 1024 cycles $=20.48$~ms per external report \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+
+

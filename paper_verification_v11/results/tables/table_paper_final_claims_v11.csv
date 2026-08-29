@@ -1,7 +1,0 @@
-claim_id,status,numeric_basis,safe_wording,limitation
-C1,RETAIN,"2x3 paired factorial, 4608 retained rows","The topology-decoupled observation framework is the primary supported innovation.","Applies to the frozen blind envelope and observation protocol."
-C2,RETAIN,"minimum mu_C lower 0.217943; minimum mu_R lower 880.008","Valid CCM operating bounds imply explicit positive finite-window information lower bounds.","Low load, DCM, invalid windows, and failed gates require freeze."
-C3,RETAIN,"maximum final covariance/envelope ratio 0.988076","Covariance contracts to a finite fixed-point neighborhood without projection.","Does not prove global nonlinear parameter-error convergence."
-C4,RETAIN,"projection-OFF divergence 0","Projection is an implementation safety bound, not the source of nominal PE stability.","Projection remains required for invalid or non-PE data protection."
-C5,LIMIT,"best cell C MAPE 0.3011; ESR MAPE 0.2222","Static accuracy is reported cell by cell; no universal winner is claimed.","Some individual metrics may favor O0 or E1/E2."
-C6,REMOVE,"Paper Verification v1 already rejected universal numerical SOTA","TS-SLTVKE is not claimed to be universally numerical-SOTA.","No claim beyond the tested baseline set."

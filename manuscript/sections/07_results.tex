@@ -1,0 +1,198 @@
+﻿\section{Results}
+\label{sec:results}
+
+\subsection{Attribution to the Observation Framework}
+
+The observation--estimator factorial provides the clearest attribution. Replacing O0 with O1 while retaining the E1 RLS kernel reduces mean capacitance MAPE from $7.0366\%$ to $0.3727\%$, mean ESR MAPE from $1.1970\%$ to $0.2233\%$, and mean internal convergence from $665.41$ to $13.21$ switching cycles. The paired ESR reduction is $0.97369$ percentage points (95\% bootstrap interval 0.92352--1.0265); all 4608 rows are retained. Supplementary Note S3 gives the other paired intervals.
+
+O1 also reduces capacitance MAPE by more than 6.7 percentage points for Dual EKF and E3 LTV/Joseph; Fig.~\ref{fig:observation_effect} shows the paired effects with their bootstrap intervals. The improvement is not universal: the Dual-EKF ESR-p95 effect is negative and its interval does not favor O1. Thus, the factorial supports the observation framework without implying monotonic improvement in every estimator metric.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_observation_effect.pdf}
+\caption{Paired O0--O1 effects on MAPE and p95 error with bootstrap intervals: (a) capacitance; (b) ESR. Positive values favor the topology-decoupled O1 observations; the adverse Dual-EKF ESR-p95 effect is retained.}
+\label{fig:observation_effect}
+\end{figure}
+
+\subsection{Static Estimator Comparison Under O1}
+
+Table~\ref{tab:static_estimators} compares the four candidates on the $48\times4\times4$ O1 matrix, and Fig.~\ref{fig:static_comparison} visualizes the mean errors; none diverges. The supervised \TSSRKE{} reproduces its Kalman parent \emph{exactly} in every static metric---the supervisor stays silent across all 768 blind rows, including the low-noise/high-skew cells that carry the largest deterministic edge disturbance. \TSRLS{} retains the lowest ESR error and fastest native convergence, a baseline strength reported throughout. Under the predeclared selection criteria of Section~\ref{sec:protocol}, \TSSRKE{} is adopted as the primary realization once the dynamic results below are included; \TSRLS{} is retained as the lightweight tracking alternative.
+
+\begin{table}[t]
+\caption{Static O1 Estimator Comparison With Internal Convergence}
+\label{tab:static_estimators}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrr}
+\toprule
+Method & C MAPE & ESR MAPE & C/ESR p95 & Conv. \\
+ & (\%) & (\%) & (\%) & (int. cycles) \\
+\midrule
+\TSRLS{} & 0.3727 & \textbf{0.2233} & 1.3182/0.7002 & \textbf{13.21} \\
+\TSKF{} & \textbf{0.3011} & 0.6446 & 1.1069/2.4992 & 33.09 \\
+Dual EKF & 0.3043 & 1.1938 & 1.1492/3.8602 & 40.58 \\
+\TSSRKE{} & \textbf{0.3011} & 0.6446 & 1.1069/2.4992 & 33.09 \\
+\bottomrule
+\end{tabular}
+\vspace{1mm}
+
+\begin{minipage}{\columnwidth}
+\scriptsize The \TSSRKE{} row equals its Kalman parent digit for digit: the supervisor stays silent on all 768 static blind rows.
+\end{minipage}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_static_comparison.pdf}
+\caption{Static mean MAPE under common O1 observations: (a) capacitance; (b) ESR. The \TSSRKE{} bars coincide with the \TSKF{} bars because the supervisor is silent in steady state.}
+\label{fig:static_comparison}
+\end{figure}
+
+\subsection{Noise and Timing Robustness}
+
+All combinations of four noise profiles and 0, 20, 50, and 100~ns residual timing skew are retained. At 50~ns under F28379D-realistic noise, C/ESR p95 errors are $0.4964\%/0.3385\%$ for \TSRLS{}, $0.4132\%/0.6888\%$ for \TSKF{}, and $0.4211\%/1.9141\%$ for Dual EKF; the \TSSRKE{} rows coincide with \TSKF{} at every noise/skew cell. Figure~\ref{fig:noise_timing} visualizes that device-realistic profile; C and ESR percentiles are shown separately because their arithmetic mean has no independent interpretation.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_noise_timing.pdf}
+\caption{p95 errors versus residual timing skew under the F28379D-realistic noise profile and shared O1 observations: (a) capacitance; (b) ESR. The \TSSRKE{} curve overlays its Kalman parent exactly; distinct line and marker styles preserve method identity in grayscale.}
+\label{fig:noise_timing}
+\end{figure}
+
+\subsection{Conditional CRLB Benchmark}
+
+A conditional CRLB is computed from the accepted-row information of the structured estimator lineage (Section~\ref{sec:estimators}) on Model-A traces through the register-nominal measurement chain, over fifteen load, duty, ADC-rate, AFE-bandwidth, and timing sensitivity cases with twenty seeds each. When the chain matches its commissioned configuration, the empirical RMSE stays within factors 1.38--2.34 (capacitance) and 1.35--3.27 (ESR) of the bound; the medians over all fifteen cases are 2.17 and 2.40 (Fig.~\ref{fig:crlb}). Deviations from the commissioned chain instead appear as bias that the noise-only bound does not model: a reduced 1.5-MHz AFE bandwidth raises the capacitance ratio to 25.0, an increased 3-MHz bandwidth raises the ESR ratio to 10.2, and 100/200-ns residual timing skew raises the capacitance ratio to 13.0/39.6. The bound therefore serves as a conditional information benchmark: noise-driven error stays within small multiples of it at the commissioned configuration, while deviations from that configuration flag calibration or timing bias.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_crlb_efficiency.pdf}
+\caption{Empirical RMSE relative to the conditional CRLB over fifteen sensitivity cases (twenty seeds each), grouped by dimension. The bound is conditional on accepted rows and models noise only, so ratios far above one indicate calibration or timing bias rather than estimator inefficiency.}
+\label{fig:crlb}
+\end{figure}
+
+\subsection{Abrupt Recovery: Resolving the Retained Failure}
+\label{sec:abrupt}
+
+Abrupt discontinuities are recovery stress tests, not aging events. In the frozen 257-post-step-cycle check ($\approx5.1$~ms), the unsupervised \TSKF{} still carries $19.2911\%$ error after $C\rightarrow0.8C$ and $49.9384\%$ after $r_C\rightarrow2r_C$: once the parameter jumps, every innovation exceeds the NIS gate and the estimate freezes. Over the full horizon (Table~\ref{tab:abrupt}; settling measured from the health-change instant at the native per-cycle cadence), its capacitance step settles only at $64.72$~ms and its ESR and joint steps never recover. \TSSRKE{} settles the capacitance, ESR, and joint steps in $1.52$, $0.48$, and $1.20$~ms---well within one $20.48$-ms external reporting interval---versus $10.72$--$17.68$~ms for \TSRLS{}. At the external reporting cadence, recovery is visible at the first or second reported sample, depending on step--report alignment (Fig.~\ref{fig:abrupt}). Dual EKF settles the ESR step fastest ($0.24$~ms) because it carries no gate, but its uncalibrated coverage, worst false-ESR transients, and highest cost are unchanged, so it remains excluded by the predeclared selection criteria of Section~\ref{sec:protocol}.
+
+\begin{table}[t]
+\caption{Abrupt-Step Settling on Frozen Stress Streams\\(From the Health-Change Instant, Native Per-Cycle Cadence)}
+\label{tab:abrupt}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrr}
+\toprule
+Method & $C\!\rightarrow\!0.8C$ & $r_C\!\rightarrow\!2r_C$ & joint \\
+ & (ms) & (ms) & (ms) \\
+\midrule
+\TSRLS{} & 10.72 & 17.68 & 17.28 \\
+\TSKF{} & 64.72 & no recovery & no recovery \\
+Dual EKF & 61.00 & \textbf{0.24} & 61.36 \\
+\TSSRKE{} & \textbf{1.52} & 0.48 & \textbf{1.20} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_abrupt_recovery.pdf}
+\caption{Report-cadence recovery after the abrupt health steps on identical frozen streams: (a) capacitance estimates after $C\rightarrow0.8C$; (b) ESR estimates after $r_C\rightarrow2r_C$. The unsupervised \TSKF{} freezes at the stale value; \TSSRKE{} re-enters the band at the first or second reported sample, depending on step--report alignment.}
+\label{fig:abrupt}
+\end{figure}
+
+\subsection{Slow Degradation Tracking}
+
+Across the $0.1$--$100$~s sweep in Table~\ref{tab:ramps}, \TSRLS{} has lower aggregate combined nRMSE and normalized lag at all four durations, and the supervised \TSSRKE{} tracks its Kalman parent to within rounding: slow drift stays below the supervisor threshold, so the resets that resolve abrupt steps deliberately do not engage on health-realistic ramps (isolated firings marginally improve the 10-s aggregate). The lightweight baseline therefore keeps a genuine ramp-tracking advantage, reported as such; Fig.~\ref{fig:joint_ramp} shows representative joint trajectories against the planted truth. Individual trajectories can still favor the Kalman side; one 10-s C-ramp case does so.
+
+\begin{table}[t]
+\caption{Aggregate Slow-Degradation Tracking\\(M1 = \TSRLS{}, M2 = \TSKF{}, M4 = \TSSRKE{})}
+\label{tab:ramps}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{rrrrrrr}
+\toprule
+Ramp & \multicolumn{3}{c}{Combined nRMSE} & \multicolumn{3}{c}{Normalized lag (\%)}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+(s) & M1 & M2 & M4 & M1 & M2 & M4 \\
+\midrule
+0.1 & 0.1161 & 0.2160 & 0.2160 & 8.053 & 22.027 & 22.027 \\
+1   & 0.0163 & 0.0454 & 0.0454 & 1.360 & 3.537 & 3.537 \\
+10  & 0.0160 & 0.0456 & 0.0449 & 1.752 & 4.492 & 4.492 \\
+100 & 0.0213 & 0.0477 & 0.0478 & 2.827 & 4.868 & 4.868 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.82\textwidth]{fig_joint_ramp.pdf}
+\caption{Representative joint health ramps: (a) capacitance-down and (b) ESR-up trajectories with the planted truth. Long-duration trajectories use trace-derived O1 sufficient statistics rather than full Simscape transients or measured aging data.}
+\label{fig:joint_ramp}
+\end{figure*}
+
+\subsection{Operating-Point Transient Immunity}
+
+Load, input-voltage, and duty transitions hold health fixed. \TSKF{} reduces the mean false-C peak ($0.7570\%$ versus $1.3017\%$), whereas \TSRLS{} reduces the mean false-ESR peak ($1.8474\%$ versus $5.1919\%$) and recovers faster. The supervised \TSSRKE{} reproduces its parent on every transient row---operating transients trigger no reset, so the supervisor adds no false-health response of its own. Neither kernel family dominates operating-transient immunity; Supplementary Fig.~S4 shows the retained load-step traces.
+
+\subsection{Closed-Loop Operation}
+
+All preceding rows keep the duty command in open loop. A supplementary study closes a deliberately simple, low-bandwidth discrete PI voltage loop with 0.5\% duty quantization around the Model-A plant and re-commissions the edge gain under feedback ($k_R^{\mathrm{cl}}=0.9987$); this and the light-load study below evaluate the observation pipeline with the lightweight \TSRLS{} realization. Three blind health cases then apply a $1.45\times$ load step, a $+20\%$ input-voltage step, and a 16-to-12-V reference step at 30~ms. Steady-tail capacitance and ESR errors remain at or below $0.222\%$ and $0.111\%$, internal convergence takes 3--7 cycles, and the largest post-transition excursions are $0.410\%$ in capacitance and $0.102\%$ in ESR (Fig.~\ref{fig:closedloop}). During the input-voltage transient, $15.7\%$ of cycles fail the CCM gate and are rejected with the estimate held; accuracy is unaffected. The study uses one noise seed per case and does not evaluate controller design itself.
+
+A second supplement runs the supervised realization itself under the same regulator, reusing the frozen closed-loop edge gain and supervisor constants. Across nominal, $1.45\times$ load-step, and 16-to-12-V reference-step cases the supervisor never fires and false-health peaks stay below $0.50\%$, so regulator transients do not masquerade as health changes. Under feedback, an abrupt $r_C\rightarrow2r_C$ step fires the supervisor once, ten cycles after the step, and settles in $0.20$~ms; a $C\rightarrow0.8C$ step fires once and settles in $0.28$~ms (Fig.~\ref{fig:srke_closedloop}). The unsupervised parent recovers neither step within the 1500-cycle (30-ms) post-step horizon, freezing at $49.95\%$ ESR error---with $7.69\%$ capacitance error induced through the compensation term---after the ESR step and $19.70\%$ capacitance error after the C step. Supervised tail errors stay at or below $0.26\%$; each case uses one noise seed.
+
+\begin{figure}[t]
+\centering
+\includegraphics{fig_srke_closedloop.pdf}
+\caption{Supervised recovery under closed-loop regulation on identical noise streams, estimates normalized by the time-varying truth: (a) $C\rightarrow0.8C$ step; (b) $r_C\rightarrow2r_C$ step, both at 30~ms (gray line). The unsupervised parent freezes at the pre-step value; \TSSRKE{} fires once and re-enters the unit line within $0.28$~ms.}
+\label{fig:srke_closedloop}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_closedloop.pdf}
+\caption{Closed-loop supplement: (a) regulator duty responses to the load, input-voltage, and reference transitions at 30~ms; (b), (c) normalized capacitance and ESR estimates. Cycles failing the CCM gate during the input-voltage transient are rejected and hold the estimate.}
+\label{fig:closedloop}
+\end{figure}
+
+\subsection{Availability Toward the Light-Load Boundary}
+
+Because identifiability is conditional on valid CCM, a fixed-duty sweep quantifies observation availability from $100\%$ down to $6.7\%$ load with the same locked pipeline. Steady-state cycle acceptance remains $100\%$ down to $20\%$ load, falls to $68.8\%$, $49.8\%$, $36.1\%$, and $9.9\%$ at $16.7\%$, $14.3\%$, $12.5\%$, and $10.0\%$ load, and reaches zero at and below $8.3\%$ load, where the estimate is held (Fig.~\ref{fig:lightload}). Internal convergence lengthens from 5 to 39 cycles over the fully available range, and endpoint errors over accepted rows stay at or below $1.4\%$ down to $10\%$ load. The switched Model-A equations flag would-be DCM cycles but do not emulate DCM conduction \cite{madrid2021dcm}; the sweep therefore quantifies availability, not DCM-mode accuracy.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_lightload.pdf}
+\caption{Light-load availability sweep at fixed duty: (a) steady-state CCM-valid cycle and accepted-edge-row fractions; (b) endpoint errors over accepted cycles. Below the availability knee the gates reject all cycles and the estimate is held.}
+\label{fig:lightload}
+\end{figure}
+
+\subsection{Complexity and Uncertainty}
+
+On the common arithmetic basis in Table~\ref{tab:complexity}, \TSRLS{}, \TSKF{}, Dual EKF, and \TSSRKE{} require 28, 46, 62, and 50 multiplications per accepted observation; the supervisor costs four multiplications and about seven additions/comparisons on top of its kernel. The joint interval coverages, against the $\approx90.25\%$ independence benchmark of Section~\ref{sec:protocol}, are $13.00\%$, $88.93\%$, $81.90\%$, and $88.93\%$, respectively. \TSSRKE{} therefore carries its parent's near-nominal simultaneous coverage for four extra multiplications per row, and \TSRLS{} remains the lowest-cost tracking realization; Fig.~\ref{fig:complexity_pareto} summarizes the accuracy--complexity tradeoff. The listed times are arithmetic estimates, not measured target worst-case execution time (WCET); acquisition and feature-processing costs are separate.
+
+\begin{table}[t]
+\caption{Per-Accepted-Observation Complexity}
+\label{tab:complexity}
+\centering
+\footnotesize
+\begin{tabular}{lrrrr}
+\toprule
+Method & Mult. & Add. & Div. & Est. time (\si{\micro\second}) \\
+\midrule
+\TSRLS{} & 28 & 20 & 1 & 1.36 \\
+\TSKF{} & 46 & 34 & 1 & 2.12 \\
+Dual EKF & 62 & 47 & 2 & 3.05 \\
+\TSSRKE{} & 50 & 41 & 1 & 2.30 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_complexity_pareto.pdf}
+\caption{Accuracy--complexity tradeoff under the common operation-count model. The ordinate is the arithmetic mean of C and ESR MAPE values, used only as a visual Pareto summary and not as the estimator-selection objective.}
+\label{fig:complexity_pareto}
+\end{figure}
+

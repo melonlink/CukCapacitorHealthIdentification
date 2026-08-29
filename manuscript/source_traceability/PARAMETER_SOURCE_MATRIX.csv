@@ -1,0 +1,53 @@
+﻿parameter_id,manuscript_symbol,value,unit,source_file,source_location,scope,status
+PAR-001,V_in_nominal,24,V,campaigns/cuk_cap_health_verification/model/model_parameters.m,"p.Vin",Model-A nominal,VERIFIED
+PAR-002,V_in_blind,"19.2;24;28.8",V,campaigns/paper_verification_v1/results/tables/table_paper_blind_cases.csv,Vin_V,48-case blind matrix,VERIFIED
+PAR-003,D_nominal,0.40,1,campaigns/cuk_cap_health_verification/model/model_parameters.m,"p.D",Model-A nominal,VERIFIED
+PAR-004,D_blind,"0.30;0.40;0.55;0.65",1,campaigns/paper_verification_v1/results/tables/table_paper_blind_cases.csv,duty,48-case blind matrix,VERIFIED
+PAR-005,f_s,50000,Hz,campaigns/cuk_cap_health_verification/model/model_parameters.m,"p.fs",plant and estimators,VERIFIED
+PAR-006,L_1,0.0005,H,campaigns/cuk_cap_health_verification/model/model_parameters.m,"p.L1",Model-A nominal,VERIFIED
+PAR-007,L_2,0.0005,H,campaigns/cuk_cap_health_verification/model/model_parameters.m,"p.L2",Model-A nominal,VERIFIED
+PAR-008,C_b,0.0001,F,campaigns/paper_algorithm_selection_v2/scripts/paper_algorithm_selection_v2_engine.m,"cfg.Cb",normalization base,VERIFIED
+PAR-009,r_b,0.05,ohm,campaigns/paper_algorithm_selection_v2/scripts/paper_algorithm_selection_v2_engine.m,"cfg.Rb",physical ESR base,VERIFIED
+PAR-010,C_o,0.00047,F,campaigns/cuk_cap_health_verification/model/model_parameters.m,"p.Co",Model-A nominal,VERIFIED
+PAR-011,R_load_nominal,10,ohm,campaigns/cuk_cap_health_verification/model/model_parameters.m,"p.Rload",Model-A nominal,VERIFIED
+PAR-012,load_factor_blind,"0.58;1;1.45",1,campaigns/paper_verification_v1/results/tables/table_paper_blind_cases.csv,load_factor,48-case blind matrix,VERIFIED
+PAR-013,C_over_C_b,"0.8;0.9;1.0",1,campaigns/paper_verification_v1/results/tables/table_paper_blind_cases.csv,C_factor,health matrix,VERIFIED
+PAR-014,r_C_over_r_b,"1;1.5;2",1,campaigns/paper_verification_v1/results/tables/table_paper_blind_cases.csv,ESR_factor,health matrix,VERIFIED
+PAR-015,C_initial_factor,"0.707893--1.287228",1,campaigns/paper_verification_v1/results/tables/table_paper_blind_cases.csv,C_init_factor,realized 48-case initialization,VERIFIED
+PAR-016,ESR_initial_factor,"0.512193--1.482756",1,campaigns/paper_verification_v1/results/tables/table_paper_blind_cases.csv,ESR_init_factor,realized 48-case initialization,VERIFIED
+PAR-017,C_bounds,"0.65--1.35 C_b",F,campaigns/paper_algorithm_selection_v2/LOCKED_ALGORITHM_SELECTION_HYPERPARAMETERS.csv,C_bounds_pu,all final estimators,VERIFIED
+PAR-018,ESR_bounds,"0.35--2.50 r_b",ohm,campaigns/paper_algorithm_selection_v2/LOCKED_ALGORITHM_SELECTION_HYPERPARAMETERS.csv,ESR_bounds_pu,all final estimators physical ESR,VERIFIED
+PAR-019,T_w_C,0.000002,s,campaigns/paper_verification_v12/scripts/paper_verification_v12_engine.m,"cfg.safeWindowS",C charge safe window and 45-case PE proof,VERIFIED
+PAR-020,k_R_paper_center,0.97719802594550731,1,campaigns/paper_algorithm_selection_v2/scripts/paper_algorithm_selection_v2_engine.m,"cfg.kRCalibration",reproduced v2.1 full-precision center adopted before the complete ESR rerun,VERIFIED_EXACT_ADOPTED
+PAR-021,k_R_min_eval,0.957654065426597,1,campaigns/paper_verification_v12/results/tables/table_physical_PE_lower_bound.csv,kR_min,evaluated-envelope conservative proof only,VERIFIED
+PAR-022,I_C_min_eval,0.33010836969,A,campaigns/paper_verification_v12/results/tables/table_physical_PE_lower_bound.csv,I_C_min,minimum over evaluated Model-B CCM cases; not an online gate,VERIFIED
+PAR-023,I_Sigma_min_eval,0.438503738383,A,campaigns/paper_verification_v12/results/tables/table_physical_PE_lower_bound.csv,I_sum_min,minimum over evaluated Model-B CCM cases; not an online gate,VERIFIED
+PAR-024,q_min_eval,6.6021673938e-7,C,"derived from PAR-019 and PAR-022","I_C_min_eval*T_w_C",evaluated PE lower bound; never an online tuned gate,VERIFIED_DERIVED
+PAR-025,lambda_RLS,0.9975,1,campaigns/paper_algorithm_selection_v2/LOCKED_ALGORITHM_SELECTION_HYPERPARAMETERS.csv,rls_lambda,TS-D-RLS,VERIFIED
+PAR-026,P0_RLS,1000,scaled covariance,campaigns/paper_algorithm_selection_v2/LOCKED_ALGORITHM_SELECTION_HYPERPARAMETERS.csv,rls_P0,TS-D-RLS separate scalar recursions,VERIFIED
+PAR-027,Q_alpha_TS_SLTVKE,2e-9,per update,campaigns/paper_algorithm_selection_v2/LOCKED_ALGORITHM_SELECTION_HYPERPARAMETERS.csv,Q_alpha,TS-SLTVKE,VERIFIED
+PAR-028,Q_ESR_TS_SLTVKE,5e-9,ohm2 per update,campaigns/paper_algorithm_selection_v2/LOCKED_ALGORITHM_SELECTION_HYPERPARAMETERS.csv,Q_ESR,TS-SLTVKE,VERIFIED
+PAR-029,NIS_gate,9,1,campaigns/paper_algorithm_selection_v2/LOCKED_ALGORITHM_SELECTION_HYPERPARAMETERS.csv,NIS_gate,TS-SLTVKE,VERIFIED
+PAR-030,noise_profiles,"1mV/0.5mA;5mV/2mA;10mV/5mA;2.2mV/1.2mA",RMS,campaigns/paper_algorithm_selection_v2/scripts/paper_algorithm_selection_v2_engine.m,"cfg.sigmaV/cfg.sigmaI",shared frozen noise,VERIFIED
+PAR-031,residual_skew,"0;20;50;100",ns,campaigns/paper_verification_v12/scripts/paper_verification_v12_engine.m,"cfg.skewNs",shared frozen timing mismatch,VERIFIED
+PAR-032,health_frame,1024,cycles,campaigns/paper_algorithm_selection_v2/scripts/paper_algorithm_selection_v2_engine.m,"cfg.healthFrameCycles",20.48 ms at 50 kHz,VERIFIED
+PAR-033,F28379D_native_rate,1092896.1749,samples/s/module,campaigns/verification_v23/config/v23_default_config.m,"cfg.nativeRateHz",device-realistic study,VERIFIED
+PAR-034,F28379D_geometry,"guard 0.5; window 2.2; points 3",us/us/count,campaigns/verification_v23/config/v23_default_config.m,"cfg.guardUs/cfg.windowUs/cfg.pointsPerSide",device-realistic study,VERIFIED
+PAR-035,I_Sigma_gate,0.12,A,campaigns/paper_algorithm_selection_v2/datasets/generate_frozen_o1_stream.m,"validR: iSum >= 0.12",prelocked ESR-row validity rule,VERIFIED
+PAR-036,q_gate,"not numerically instantiated",NA,campaigns/paper_algorithm_selection_v2/datasets/generate_frozen_o1_stream.m,"validC: acceptedCCount > 0 and loadFactor >= 0.20",charge acceptance uses frozen validity flag rather than a scalar q threshold,VERIFIED_NO_NUMERIC_GATE
+PAR-037,k_R_calibration_method,"median of 588 pooled ESR_raw/reference_ESR edge ratios over 4 declared profiles",1,campaigns/verification_v21/covariance/train_v21_covariance.m,"training_cases; calibrate_edge_gain",independently rerun with exact match to archived v2.1 lock,VERIFIED_REPRODUCED
+PAR-038,T_w_R,0.0000022,s,campaigns/verification_v23/config/v23_default_config.m,"cfg.windowUs=2.2",F28379D ESR edge-fit window,VERIFIED
+PAR-039,TS_D_RLS_estimator_time,1.36,us/accepted observation,campaigns/paper_algorithm_selection_v2/results/tables/table_algorithm_complexity.csv,"M1 estimated_execution_us_per_observation",arithmetic-model estimate; not WCET,VERIFIED
+PAR-040,health_report_cadence,0.02048,s,campaigns/paper_algorithm_selection_v2/ALGORITHM_SELECTION_PROTOCOL.md,"1024 cycles at 50 kHz",external reporting cadence; distinct from convergence,VERIFIED_DERIVED
+PAR-041,platform_budget,14,us/PWM period,campaigns/verification_v23/F28379D_COMPUTE_BUDGET.md,"4.5+3.0+5.0+1.5 us",conservative acquisition/processing budget; not estimator execution time,VERIFIED
+PAR-042,k_R_v21_full,0.97719802594550731,1,campaigns/calibration_closure/results/table_kR_calibration_summary.csv,"kR_reproduced_full / kR_archived_v21_full",exact reproduction of archived v2.1 calibration lock,VERIFIED_EXACT
+PAR-043,k_R_calibration_dataset,"4 profiles; 147 edges/profile; 588 pooled ratios",count,campaigns/calibration_closure/results/table_kR_calibration_raw.csv,"case_id / operating_profile / accepted",generated from archived source models and seeds 11901-11904,VERIFIED_REPRODUCED
+PAR-044,k_R_calibration_formula,"median(z_R/(I_Sigma*r_C_ref)); omit NaN only; no weighting",1,campaigns/verification_v21/covariance/train_v21_covariance.m,"calibrate_edge_gain",actual archived formula; not LS/WLS,VERIFIED
+PAR-045,r_C_reference,0.05,ohm,campaigns/cuk_cap_health_verification/model/model_parameters.m,"p.ESR",planted Model-A/Model-B calibration truth; not measured hardware ESR,SIMULATION_REFERENCE_TRUTH
+PAR-046,k_R_seed_amplitude,0.006,1,campaigns/paper_algorithm_selection_v2/scripts/paper_algorithm_selection_v2_engine.m,"cfg.kRSeedAmplitude",casewise fixed variation around the adopted 0.97719802594550731 center,HARDCODED_CASEWISE
+PAR-047,k_R_sensitivity,"delta=-1;-0.5;-0.25;0;0.25;0.5;1",percent,campaigns/calibration_closure/results/table_kR_sensitivity.csv,"35 TS-D-RLS rows; five representative cases",worst absolute endpoint ESR bias 1.170818 percent; no retuning,VERIFIED_SMALL_CHECK
+PAR-048,k_R_manuscript_display,0.9772,1,campaigns/calibration_closure/results/table_kR_calibration_summary.csv,"round(kR_reproduced_full,4)",four-decimal manuscript display; full precision remains the computation input,VERIFIED_ROUNDED_DISPLAY
+PAR-049,k_R_rerun_factorial_rows,4608,count,campaigns/paper_verification_v12/results/raw/factorial_rows.csv,"48 cases x 4 noise x 4 skew x 2 observations x 3 estimators",complete recalibrated paired factorial,VERIFIED_RERUN
+PAR-050,k_R_rerun_algorithm_metric_changes,"25 of 66",count,campaigns/recalibrated_campaign/results/table_algorithm_metric_deltas.csv,"changed=true",machine-readable final-selection cells changed after recalibration,VERIFIED_RERUN
+PAR-051,k_R_rerun_manuscript_manifest,88,count,campaigns/recalibrated_campaign/results/table_manuscript_numeric_updates.csv,"all manuscript-facing rows",changed and invariant values retained for audit,VERIFIED_RERUN
+

@@ -1,0 +1,72 @@
+﻿\section{Verification Methodology}
+\label{sec:protocol}
+
+This section declares the models, comparisons, fairness rules, and metrics that all results in Sections~\ref{sec:results} and~\ref{sec:device} consume; every threshold and hyperparameter is fixed before blind evaluation and never retuned afterward. All models and estimators are implemented in MATLAB (R2023b).
+
+\subsection{Model and Data Hierarchy}
+
+The evaluation separates equation checks, independent plant traces, estimator comparisons, and device-realistic acquisition:
+\begin{enumerate}
+\item Model A is a switched-equation \Cuk{} model for sign, timing, and rapid dynamic checks.
+\item Model B is an independently constructed Simscape model; its 45 traces calibrate current scale and edge slope and supply the blind observation data.
+\item The estimator comparison uses 48 stratified blind operating/health cases, four noise profiles, and four residual timing-skew levels under common O1 observations.
+\item The F28379D model adds register-realizable sampling, aperture/occupancy, reference/clock effects, analog-front-end (AFE) residuals, and Monte Carlo variation; it remains a simulation.
+\end{enumerate}
+Supplementary closed-loop-regulation and light-load-availability studies reuse the locked pipeline on Model-A cycles, and a conditional CRLB study benchmarks estimator error against the noise-only bound; all three are reported in Section~\ref{sec:results}.
+
+\subsection{Factorial and Blind Comparisons}
+
+The observation--estimator factorial crosses a generic mixed-observation baseline (O0) and the proposed direction-decoupled set (O1) with RLS (E1), the dual extended Kalman filter (Dual EKF, E2), the structured LTV/Joseph estimator (E3), and the supervised-reset estimator (E4, \TSSRKE{}). O0 is defined explicitly: each update uses the single non-decoupled row $\Delta v_T=(q/C_b)\alphab+\Delta i_C\,r_C+\nu$ built from generic within-cycle samples, retaining the raw acquisition-lag contribution and using no edge-timestamp reconstruction, so capacitance and ESR share one coupled regression. O0 is not claimed as a reproduction of any single published method; it represents the generic coupled within-cycle observation that discards topology-synchronous edge reconstruction. O1 replaces this row with the decoupled pair of Section~\ref{sec:observations}. Both sets use identical sensors, identical seeds, and one predeclared hyperparameter row per estimator family, so the factorial isolates the observation structure itself. All $2\times4\times768=6144$ paired rows are retained, and the E1--E3 rows reproduce the pre-supervision campaign exactly because the observation streams are seeded per condition and shared. The final comparison evaluates \TSSRKE{} against \TSRLS{}, \TSKF{}, and Dual EKF under O1 with predeclared primary-selection criteria: steady-state behavior within 2\% of the Kalman parent, best-or-equal abrupt settling relative to the two retained realizations (\TSRLS{} and \TSKF{}), coverage within two percentage points of the parent, and no worse load-transient false-health peaks.
+
+The broader baseline study includes closed-form, mixed-RLS, augmented/Dual-EKF, and \Cuk{}-adapted wavelet--Kalman methods. An NPC spectral method was excluded because the literature provides no unique mapping to the \Cuk{} edge/charge convention.
+
+\subsection{Fairness Rules and Metrics}
+
+All methods use identical blind cases, observations, seeds, initialization distributions, noise/timing realizations, and predeclared hyperparameters; Table~\ref{tab:verification_settings} lists the blind verification and estimator settings. Failed or saturated rows are retained, no method is retuned after blind evaluation, and paired effects use 10,000 bootstrap resamples. The resampling treats the case--condition rows as exchangeable with estimator pairing preserved; rows sharing a base plant case are not independent, so the reported intervals quantify uncertainty over the evaluated grid rather than over an independent population of converters.
+
+Abrupt C/ESR discontinuities are estimator stress tests. The principal dynamic cases are linear and smooth C-down, ESR-up, and joint ramps lasting $0.1$, 1, 10, and 100~s. Long ramps use trace-derived O1 sufficient statistics, while $0.1$~s cases are cross-checked at every switching pair with Model A. Load, input-voltage, and duty transitions hold health constant to measure false-health response. None of these trajectories is hardware aging data.
+
+\begin{table*}[t]
+\caption{Blind Verification and Estimator Settings}
+\label{tab:verification_settings}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{3.0cm}p{6.0cm}p{6.6cm}}
+\toprule
+Item & Predeclared setting & Role/source boundary \\
+\midrule
+Health/load matrix & $C/C_b\in\{0.8,0.9,1.0\}$; $r_C/r_b\in\{1,1.5,2\}$; load factors $0.58/1/1.45$ & Stratified blind plant matrix; retained CCM rows only \\
+Initialization & realized $\hat C_0/C\in[0.708,1.287]$; $\hat r_{C,0}/r_C\in[0.512,1.483]$ & Read from the blind-case table \\
+Parameter bounds & $C/C_b\in[0.65,1.35]$; $r_C/r_b\in[0.35,2.50]$ & Predeclared projection limits; failed/saturated rows retained \\
+Noise profiles & $(\sigma_v,\sigma_i)=(1~\mathrm{mV},0.5~\mathrm{mA})$, $(5~\mathrm{mV},2~\mathrm{mA})$, $(10~\mathrm{mV},5~\mathrm{mA})$, and $(2.2~\mathrm{mV},1.2~\mathrm{mA})$ & Shared realization; last pair is F28379D-realistic \\
+Residual skew & 0, 20, 50, and 100 ns & Shared by all compared estimators \\
+Online validity/gating & valid CCM/state/time and safe feature; $I_{\Sigma,\mathrm{gate}}=0.12$~A; no numeric $q_{\mathrm{gate}}$; \TSKF{} NIS gate 9 & Fixed before evaluation, not inferred from PE minima \\
+Evaluated PE constants & $I_{C,\min}^{\mathrm{eval}}=0.330108$~A; $I_{\Sigma,\min}^{\mathrm{eval}}=0.438504$~A; $q_{\min}^{\mathrm{eval}}=0.660217$~\si{\micro\coulomb} & Minima over 45 evaluated Model-B CCM cases; proof only, never online tuning thresholds \\
+Blind comparison & 48 cases $\times$ 4 noise levels $\times$ 4 skews; O0/O1 $\times$ RLS/Dual EKF/LTV-Joseph/\TSSRKE{} & O1 is then shared by all four estimators \\
+Statistics/dynamics & 10,000 paired bootstrap resamples; 0.1/1/10/100-s C, ESR, and joint ramps & Load, input-voltage, and duty steps hold physical health fixed \\
+\TSKF{} settings & $Q_\alpha=2\times10^{-9}$, $Q_r=5\times10^{-9}$, $P_{0,\alpha}=0.0144$, $P_{0,r}$ scale 0.45, NIS 9 & Held fixed before blind comparison; shared by the \TSSRKE{} kernel \\
+\TSSRKE{} supervisor & $a_{\mathrm f}=1/16$, $a_{\mathrm s}=1/128$, $\tau=2.5$, clip 6, warm-up/hold-off 32 rows & Predeclared, shared by both directions; never retuned per case \\
+Device acquisition & 1.093 MS/s/module; 0.5-\si{\micro\second} guard; $T_{w,R}=2.2$~\si{\micro\second}; three points/side & Constrained F28379D simulation only \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Static endpoint errors are
+\begin{equation}
+e_C=100\left|\hat C_N/C-1\right|,\quad
+e_R=100\left|\hat r_{C,N}/r_C-1\right|,
+\end{equation}
+with the mean absolute percentage error (MAPE) and 95th percentile (p95) computed over retained rows. Interval calibration is reported as joint coverage---the fraction of retained rows whose marginal 95\% capacitance and ESR intervals cover their true values simultaneously; under approximate independence the nominal benchmark is $0.95^2\approx90.25\%$. ``Convergence cycles'' is the first cycle that begins a run of 32 consecutive cycles with both relative errors within 5\%; unconverged cases are assigned the 1024-cycle horizon. Rejected cycles hold the estimate and remain in the count. This internal settling metric differs from the 1024-cycle ($20.48$-ms) external reporting cadence.
+
+For a trajectory $y(t)$ with initial truth $y_0$, the implemented tracking metric is
+\begin{equation}
+\operatorname{nRMSE}_y=
+\sqrt{\frac{\int(\hat y-y)^2dt}{\int(y-y_0)^2dt}}.
+\end{equation}
+Combined nRMSE is the unweighted mean of finite C and ESR values. Normalized lag is the largest finite C/ESR delay estimated from zero-mean cross-correlation and from 50\%-trajectory crossings, divided by the trajectory duration. Missed threshold crossings are retained but are not used to select the primary estimator. Supplementary Note S3 records the complete threshold and bootstrap definitions.
+
+
+
+
+

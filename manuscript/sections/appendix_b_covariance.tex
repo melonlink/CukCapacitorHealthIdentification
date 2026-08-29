@@ -1,0 +1,14 @@
+\section{Scalar Covariance Envelope}
+\label{app:covariance}
+
+Let the posterior scalar variance at the start of a finite window be $P_n$. Process accumulation gives $P_n^-\le P_n+Q_N$. Assimilating total scalar information $\mu$ gives
+\begin{equation}
+P_{n+1}\le\left(\frac{1}{P_n+Q_N}+\mu\right)^{-1},
+\end{equation}
+which is~\eqref{eq:cov_recursion}. Setting $P_{n+1}=P_n=P^*$ gives
+\begin{equation}
+\mu(P^*)^2+\mu Q_NP^*-Q_N=0,
+\end{equation}
+whose positive root is~\eqref{eq:fixed_point}. The map is increasing and bounded above by $1/\mu$. When $Q_N=0$, inversion gives $P_{n+1}^{-1}\ge P_n^{-1}+\mu$ and hence $P_n\le(P_0^{-1}+n\mu)^{-1}$. With bounded conditional mismatch, a finite case-dependent error term must be added.
+
+The largest validated fixed points are $0.0112191$ in the normalized-capacitance direction and $8.82437\times10^{-6}$ in the ESR direction.

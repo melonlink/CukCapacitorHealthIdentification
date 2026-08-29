@@ -1,0 +1,19 @@
+manuscript_figure,file,source_file,source_status,caption_boundary
+fig:two_states,figures/fig01_cuk_topology.pdf,"campaigns/cuk_cap_health_verification/model/simulate_switched_equation.m; docs/Cuk_energy_transfer_capacitor_health_theory_v0.2.md",V02_VECTOR_REDRAW,"formal topology and sign convention; no numeric data"
+fig:framework,figures/fig02_observation_framework.pdf,"campaigns/verification_v21/THEORY_CLOSURE_V21.md; campaigns/paper_algorithm_selection_v3/scripts (supervisor definition)",V06_CORE_METHOD_REDESIGN,"schematic waveforms (concept panel, no numeric data); supervisor architecture matches the locked v1.3/v3 implementation"
+fig:observation_effect,figures/fig_observation_effect.pdf,campaigns/paper_verification_v13/results/tables/table_observation_effect_bootstrap.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"paired MAPE and p95 effects; adverse Dual-EKF ESR-p95 effect retained"
+fig:pe_lower_bound,figures/fig_pe_lower_bound.pdf,campaigns/paper_verification_v13/results/tables/table_physical_PE_lower_bound.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"frozen Model-B CCM cases"
+fig:static_comparison,figures/fig_static_comparison.pdf,campaigns/paper_algorithm_selection_v3/results/tables/table_algorithm_static_comparison.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"O1 final estimator tradeoff; zero-baseline MAPE panels"
+fig:noise_timing,figures/fig_noise_timing.pdf,campaigns/paper_algorithm_selection_v3/results/tables/table_algorithm_noise_timing.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"separate C/ESR p95 panels for the F28379D-realistic profile"
+fig:joint_ramp,figures/fig_joint_ramp.pdf,campaigns/paper_algorithm_selection_v3/results/raw/ramp_history.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"trace-derived 1 s joint ramp; not measured aging"
+fig:S4_operating_transient,figures/fig_operating_transient.png,campaigns/paper_algorithm_selection_v3/results/figures/fig_alg_09_load_transient_false_health.png,FINAL_V2_RERUN_MOVED_TO_SUPPLEMENT,"health held constant; numeric result unchanged"
+fig:complexity_pareto,figures/fig_complexity_pareto.pdf,"campaigns/paper_algorithm_selection_v3/results/tables/table_algorithm_complexity.csv; campaigns/paper_algorithm_selection_v3/results/tables/table_algorithm_static_comparison.csv",V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"x is multiplications per accepted observation; y is arithmetic mean of C/ESR MAPE; no weighted score"
+fig:S1_schedule,supplementary/figures/fig_f28379d_schedule.png,campaigns/verification_v23/results/figures/fig_v23_03_soc_schedule.png,FINAL_V23,"migrated to supplementary; device-realistic schedule"
+fig:S2_window,supplementary/figures/fig_f28379d_window.png,campaigns/verification_v23/results/figures/fig_v23_02_full_aperture_edge_window.png,FINAL_V23,"migrated to supplementary; not hardware measurement"
+fig:S3_f28379d_mc,supplementary/figures/fig_f28379d_monte_carlo.png,campaigns/verification_v23/results/figures/fig_v23_12_monte_carlo_accuracy.png,FINAL_V23,"migrated to supplementary; main text retains table and numeric MC results"
+fig:crlb,figures/fig_crlb_efficiency.pdf,campaigns/verification_v21/results/tables/table_CRLB_v21.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"conditional noise-only bound; structured estimator lineage; bias cases retained"
+fig:closedloop,figures/fig_closedloop.pdf,campaigns/closedloop_dcm_validation/results/tables/table_closedloop_history.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"single seed per case; simple PI regulator; Model-A plant"
+fig:lightload,figures/fig_lightload.pdf,campaigns/closedloop_dcm_validation/results/tables/table_lightload_sweep.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"availability only; Model A does not emulate DCM conduction"
+
+
+fig:abrupt,figures/fig_abrupt_recovery.pdf,campaigns/paper_algorithm_selection_v3/results/raw/abrupt_history.csv,V06_FOUR_METHOD_REDRAW_FROM_FROZEN_CSV,"report-cadence recovery; stress test not aging; TS-SLTVKE freeze retained"

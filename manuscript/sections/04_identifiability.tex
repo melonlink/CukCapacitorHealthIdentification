@@ -1,0 +1,107 @@
+﻿\section{Finite-Window Identifiability and Information Bounds}
+\label{sec:identifiability}
+
+\subsection{Joint Identifiability from the Raw Observation Pair}
+
+Identifiability is established on the raw observations, before any sequential ESR compensation. Stacking the uncompensated charge relation~\eqref{eq:integral_port}, written as $\Delta v_T=(q/C_b)\alphab+r_C\Delta i_C+\nu_{\Delta v}$, with the edge row~\eqref{eq:esr_observation} gives
+\begin{equation}
+\begin{bmatrix}\Delta v_T\\z_R\end{bmatrix}
+=\vect{H}_k\,\vect{\theta}+\vect{\nu}_k,
+\qquad
+\vect{H}_k=
+\begin{bmatrix}q/C_b&\Delta i_C\\0&k_RI_\Sigma\end{bmatrix}.
+\label{eq:joint_obs}
+\end{equation}
+Since $\det\vect{H}_k=(q/C_b)\,k_RI_\Sigma$, the matrix has full rank whenever $q\neq0$, $I_\Sigma\neq0$, and $k_R\neq0$. These conditions hold over the evaluated valid-CCM envelope: the edge-current condition is enforced explicitly by~\eqref{eq:gates}, nonzero accepted charge follows from the sign-invariant CCM charge windows of that envelope, and $k_R\neq0$ is a fixed calibration assumption rather than an online gate. For finite positive-definite raw-observation covariances $\vect{R}_k$, the joint Gramian $\sum_k\vect{H}_k^{\mathsf T}\vect{R}_k^{-1}\vect{H}_k$ is therefore positive definite for any window containing at least one complete accepted pair. Conditional on the accepted reconstructed regressors and the fixed calibration coefficient, $(\alphab,r_C)$ is jointly locally identifiable from the raw observation model; since $C=C_b/\alphab$ is locally one-to-one for $\alphab>0$, the same holds for $(C,r_C)$. No estimate of $r_C$ enters this claim. The stacked pair is an identifiability construction only: the online implementation need not process the two rows simultaneously, and the sequential bounds below count $m_C$ charge and $m_R$ edge rows separately.
+
+\subsection{Information Structure of the Sequential Implementation}
+
+The implemented recursion processes the triangular structure of~\eqref{eq:joint_obs} sequentially: the edge row involves $r_C$ alone, and the charge row is compensated with the most recent ESR estimate in~\eqref{eq:c_observation}, whose residual $(r_C-\hat r_C)\Delta i_C$ is propagated in the conditional covariance~\eqref{eq:c_covariance} rather than ignored. For this decoupled stream, recall the regressors $h_C=q/C_b$ and $h_R=k_RI_\Sigma$, with conditional variances $R_C$ and $R_R$; the per-direction finite-window information Gramian is
+\begin{equation}
+\vect{G}_{\theta,N}=
+\sum_{k\in\mathcal K_C}\frac{1}{R_{C,k}}
+\begin{bmatrix}h_{C,k}^2&0\\0&0\end{bmatrix}
++
+\sum_{k\in\mathcal K_R}\frac{1}{R_{R,k}}
+\begin{bmatrix}0&0\\0&h_{R,k}^2\end{bmatrix}.
+\label{eq:gramian}
+\end{equation}
+
+Suppose that on every accepted charge interval the current satisfies $|i_C|\ge I_{C,\min}^{\mathrm{eval}}$ without changing sign and that the interval length is at least $T_{w,C,\min}$. Then $|q|\ge q_{\min}^{\mathrm{eval}}=I_{C,\min}^{\mathrm{eval}}T_{w,C,\min}$. If $R_C\le R_{C,\max}$ and $R_R\le R_{R,\max}$, if the calibrated $k_R$ stays fixed with a known conservative lower bound $k_{R,\min}^{\mathrm{eval}}>0$ over the evaluated envelope, and if $I_\Sigma\ge I_{\Sigma,\min}^{\mathrm{eval}}>0$, then the per-direction information of a window containing $m_C$ charge rows and $m_R$ edge rows is bounded below by
+\begin{align}
+\underline\mu_C & =m_C\frac{(I_{C,\min}^{\mathrm{eval}}T_{w,C,\min}/C_b)^2}{R_{C,\max}},
+\label{eq:mu_c}\\
+\underline\mu_R & =m_R\frac{(k_{R,\min}^{\mathrm{eval}})^2(I_{\Sigma,\min}^{\mathrm{eval}})^2}{R_{R,\max}}.
+\label{eq:mu_r}
+\end{align}
+These bounds yield the following result for the implemented stream.
+
+\begin{proposition}[Direction-wise finite-window information positivity]
+\label{prop:identifiability}
+Assume valid CCM; $k_R$ known and fixed during each identification window; sign-invariant accepted charge windows; positive accepted edge-current sum; finite conditional covariances; and at least one accepted charge and edge row in a finite window. Then
+\begin{equation}
+\vect{G}_{\theta,N}\succeq
+\operatorname{diag}(\underline\mu_C,\underline\mu_R)\succ\vect{0},
+\label{eq:positive_gramian}
+\end{equation}
+so the implemented sequential stream retains strictly positive finite-window information in both parameter directions.
+\end{proposition}
+
+\emph{Proof:} Each charge row contributes a positive semidefinite matrix only in the $\alphab$ direction, and each edge row contributes one only in the $r_C$ direction. Applying the physical lower bounds in~\eqref{eq:mu_c} and~\eqref{eq:mu_r}, summing $m_C$ and $m_R$ accepted contributions, and noting that both lower bounds are strictly positive establishes~\eqref{eq:positive_gramian}. \hfill$\square$
+
+\begin{remark}[Conditional nature of the excitation]
+\label{rem:conditional}
+PWM alone does not guarantee persistent excitation (PE) at every load or conduction mode. The \Cuk{} topology supplies the physical directions, while accepted rows certify when the bound applies. The superscript ``eval'' marks minima over the evaluated CCM envelope; these constants are neither online gates nor post-hoc tuning values.
+\end{remark}
+
+\subsection{Numerical Lower-Bound Check}
+
+The constants of Proposition~\ref{prop:identifiability} are instantiated on the evaluated envelope as follows. Across 45 independent Model-B CCM cases, the weakest physical quantities are
+\begin{align}
+I_{C,\min}^{\mathrm{eval}}&=0.330108~\mathrm{A},&
+I_{\Sigma,\min}^{\mathrm{eval}}&=0.438504~\mathrm{A},\nonumber\\
+q_{\min}^{\mathrm{eval}}&=0.660217~\si{\micro\coulomb}&&
+\end{align}
+with $T_{w,C,\min}=2.0$~\si{\micro\second} and $k_{R,\min}^{\mathrm{eval}}=0.957654$. The resulting weakest information bounds are
+\begin{equation}
+\underline\mu_C=0.217943,\qquad
+\underline\mu_R=880.008.
+\label{eq:numerical_mu}
+\end{equation}
+The minimum ratios of empirical information to the corresponding conservative bound are 1.02872 and 1.02334. Hence every retained case exceeds its computed bound, and the weakest case rather than a nominal case determines the reported constants; Fig.~\ref{fig:pe_lower_bound} plots the empirical information against the corresponding bounds for all retained cases. These existence bounds are complemented by the conditional CRLB benchmark of Section~\ref{sec:results}, which quantifies how closely the realized estimator variance approaches the accepted-row information.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_pe_lower_bound.pdf}
+\caption{Theoretical lower bounds versus empirical finite-window information over the Model-B CCM cases. Circles denote normalized inverse capacitance and squares denote physical ESR; their parameterization-dependent magnitudes and units are not directly comparable. All accepted cases lie above the equality line.}
+\label{fig:pe_lower_bound}
+\end{figure}
+
+\subsection{Covariance Contraction for the Uncertainty Extension}
+
+For the interval-reporting extension of Section~\ref{sec:estimators}, let $P_n$ be a posterior variance, $Q_N$ the process variance accumulated over a finite window, and $\mu\ge\underline\mu>0$ the accepted information.
+
+\begin{proposition}[Finite-window covariance boundedness]
+\label{prop:covariance}
+For recurring valid updates, finite $0\le Q_N\le\bar Q_N$, and $\mu\ge\underline\mu>0$, the posterior variance satisfies
+\begin{equation}
+P_{n+1}\le
+\frac{P_n+Q_N}{1+\mu(P_n+Q_N)}.
+\label{eq:cov_recursion}
+\end{equation}
+For constant $Q_N$, the positive fixed point of~\eqref{eq:cov_recursion} is
+\begin{equation}
+P^*=\frac{-Q_N+\sqrt{Q_N^2+4Q_N/\mu}}{2}.
+\label{eq:fixed_point}
+\end{equation}
+For $Q_N=0$, $P_n^{-1}\ge P_0^{-1}+n\mu$.
+\end{proposition}
+
+\emph{Proof:} See Appendix~\ref{app:covariance}, which also reports validated fixed-point values. \hfill$\square$
+
+\begin{remark}[Scope of the contraction result]
+\label{rem:contraction_scope}
+Proposition~\ref{prop:covariance} is a conditional linear-model result consistent with standard filtering theory \cite{jazwinski1970filtering,anderson1979optimal}, not a global nonlinear-converter convergence theorem. Projection is inactive in all 200 legal-PE seeds and is treated as a safety constraint rather than the source of contraction.
+\end{remark}
+
+

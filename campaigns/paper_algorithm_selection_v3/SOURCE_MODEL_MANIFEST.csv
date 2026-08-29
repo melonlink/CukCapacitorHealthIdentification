@@ -1,0 +1,6 @@
+campaign,source_model,meaning
+static,FROZEN_PV12_RECALIBRATED_ANCHOR,v1.2 recalibrated paired rows
+ramp_long,TRACE_DERIVED_OBSERVATION,frozen O1 grouped sufficient statistics
+ramp_0p1_crosscheck,FULL_SWITCHING_MODEL_A_EQUATIONS,every switching pair from frozen Model-A equations
+abrupt,FULL_SWITCHING_MODEL_A_EQUATIONS,every switching pair; nonphysical parameter jump
+operating_transient,FULL_SWITCHING_MODEL_A_EQUATIONS,every switching pair; health parameters held fixed

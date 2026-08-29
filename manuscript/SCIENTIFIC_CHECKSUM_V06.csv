@@ -1,0 +1,36 @@
+quantity,frozen_value,source,status
+TS-D-RLS C MAPE (%),0.3727,campaigns/paper_verification_v13 factorial (E1 invariant vs v1.2),FROZEN
+TS-D-RLS ESR MAPE (%),0.2233,campaigns/paper_verification_v13 factorial (E1 invariant vs v1.2),FROZEN
+TS-D-RLS convergence (cycles),13.21,campaigns/paper_verification_v13 factorial (E1 invariant vs v1.2),FROZEN
+TS-SLTVKE C MAPE (%),0.3011,campaigns/paper_verification_v13 factorial (E3 invariant vs v1.2),FROZEN
+TS-SLTVKE ESR MAPE (%),0.6446,campaigns/paper_verification_v13 factorial (E3 invariant vs v1.2),FROZEN
+Dual EKF C MAPE (%),0.3043,campaigns/paper_verification_v13 factorial (E2 invariant vs v1.2),FROZEN
+Dual EKF ESR MAPE (%),1.1938,campaigns/paper_verification_v13 factorial (E2 invariant vs v1.2),FROZEN
+mu_C,0.217943,campaigns/paper_verification_v13 table_physical_PE_lower_bound,FROZEN
+mu_R,880.008,campaigns/paper_verification_v13 table_physical_PE_lower_bound,FROZEN
+k_R main-text display,0.9772,campaigns/verification_v21 locked coefficient,FROZEN
+k_R full precision,0.97719802594550731,campaigns/verification_v21 locked coefficient,FROZEN
+I_Sigma_gate (A),0.12,predeclared online gate,FROZEN
+T_w_C (us),2.0,predeclared charge window,FROZEN
+T_w_R (us),2.2,predeclared edge-fit window,FROZEN
+F28379D p95 C (%),1.6425,campaigns/verification_v23,FROZEN
+F28379D p95 ESR (%),2.6109,campaigns/verification_v23,FROZEN
+TS-SRKE C MAPE (%),0.3011,campaigns/paper_algorithm_selection_v3 static (identical to parent),NEW_V06
+TS-SRKE ESR MAPE (%),0.6446,campaigns/paper_algorithm_selection_v3 static (identical to parent),NEW_V06
+TS-SRKE joint coverage (%),88.93,campaigns/paper_algorithm_selection_v3 uncertainty,NEW_V06
+TS-SRKE C-step settle (ms),1.52,campaigns/paper_algorithm_selection_v3 abrupt,NEW_V06
+TS-SRKE ESR-step settle (ms),0.48,campaigns/paper_algorithm_selection_v3 abrupt,NEW_V06
+TS-SRKE joint-step settle (ms),1.20,campaigns/paper_algorithm_selection_v3 abrupt,NEW_V06
+TS-SRKE multiplications/row,50,operation-count model (kernel 46 + supervisor 4),NEW_V06
+Selection decision,PRIMARY_TS_SRKE,campaigns/paper_algorithm_selection_v3 predeclared criteria,NEW_V06
+Supervisor constants,"aF=1/16 aS=1/128 tau=2.5 clip=6 warmup=32 holdoff=32",predeclared in v1.3/v3 configurations,NEW_V06
+E1-E3 invariance vs v1.2,max |delta| = 0 over 4608 rows,run_paper_verification_v13 check,VERIFIED
+M1-M3 invariance vs v2,max |delta| = 0 static summary,run_paper_algorithm_selection_v3 check,VERIFIED
+SRKE closed-loop supervisor fires (transient cases),0,campaigns/closedloop_srke_validation CLS-1/2/3,NEW_V073
+SRKE closed-loop false-health peak max (%),0.492,campaigns/closedloop_srke_validation CLS-3,NEW_V073
+SRKE closed-loop ESR-step settle (ms),0.20,campaigns/closedloop_srke_validation CLS-4,NEW_V073
+SRKE closed-loop C-step settle (ms),0.28,campaigns/closedloop_srke_validation CLS-5,NEW_V073
+SRKE closed-loop first fire (cycles post-step),10 and 12,campaigns/closedloop_srke_validation CLS-4/CLS-5,NEW_V073
+Parent closed-loop ESR-step tail error (%),49.95 (7.69 induced C),campaigns/closedloop_srke_validation CLS-4 unsupervised,NEW_V073
+Parent closed-loop C-step tail error (%),19.70,campaigns/closedloop_srke_validation CLS-5 unsupervised,NEW_V073
+SRKE closed-loop tail errors max (%),0.260,campaigns/closedloop_srke_validation CLS-1..5 supervised,NEW_V073

@@ -1,4 +1,4 @@
-# MATLAB generated files
+﻿# MATLAB generated files
 *.asv
 *.autosave
 *.slxc
@@ -11,9 +11,8 @@ codegen/
 
 # Large reproducible verification workspaces stay local. Source, CSV tables,
 # PNG/FIG plots and Simulink models are versioned; run_all.m rebuilds MAT files.
-cuk_cap_health_verification/results/**/*.mat
-verification_v2/results/**/*.mat
-verification_v22/results/**/*.mat
+campaigns/cuk_cap_health_verification/results/**/*.mat
+campaigns/verification_v2/results/**/*.mat
 
 # Local caches and temporary data
 .cache/
@@ -22,3 +21,13 @@ verification_v22/results/**/*.mat
 # Run-local MATLAB preferences and duplicated review exports
 **/logs/matlab_prefs/
 **/gpt_review_package/
+
+# v0.4 additions: regenerable supplement workspaces and LaTeX build cache
+campaigns/closedloop_dcm_validation/results/*.mat
+manuscript/build/
+
+letter/build/
+
+# v0.7 additions: Chinese manuscript build cache and regenerable SRKE workspace
+manuscript/chinese/build/
+campaigns/closedloop_srke_validation/results/*.mat

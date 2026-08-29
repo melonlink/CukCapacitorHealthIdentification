@@ -1,0 +1,11 @@
+﻿manuscript_table,source_file,source_rows,status
+tab:related_work,campaigns/paper_verification_v1/literature/SOTA_LITERATURE_MATRIX.csv,"L03,L04,L05,L08,L11 required_sensors plus this work",REMOVED_V065_TABLE_DELETED_content_absorbed_into_Sec_I_critique_chain_and_Sec_III_sensing_note
+tab:notation,docs/Cuk_IEEE_Manuscript_Outline_v1.md,"Section 9 symbol unification",VERIFIED
+tab:converter_parameters,manuscript_v031/source_traceability/PARAMETER_SOURCE_MATRIX.csv,"PAR-001 through PAR-020; PAR-025/026; PAR-032/038/040; four-decimal k_R display and author-level wording cleanup",VERIFIED_V031_DISPLAY_ONLY
+tab:observations,campaigns/paper_verification_v12/PAPER_THEORY_PROOF_V12.md,"Sections 1-4",VERIFIED_RERUN
+tab:verification_settings,manuscript_v03/source_traceability/PARAMETER_SOURCE_MATRIX.csv,"PAR-012 through PAR-018; PAR-021 through PAR-041",VERIFIED_V03
+tab:static_estimators,campaigns/paper_algorithm_selection_v2/results/tables/table_algorithm_static_comparison.csv,"Native M1/M2/M3",VERIFIED_RERUN
+tab:ramps,campaigns/paper_algorithm_selection_v2/FINAL_ESTIMATOR_DECISION.md,"Questions 3-6",VERIFIED_RERUN
+tab:complexity,campaigns/paper_algorithm_selection_v2/results/tables/table_algorithm_complexity.csv,"M1/M2/M3",VERIFIED_INVARIANT
+tab:f28379d,campaigns/verification_v23/results/tables/result_metrics_v23.csv,"selected locked metrics",VERIFIED
+

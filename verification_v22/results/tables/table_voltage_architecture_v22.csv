@@ -1,4 +1,0 @@
-voltage_architecture,architecture_name,description,C_channel_low_V,C_channel_high_V,edge_channel_low_V,edge_channel_high_V,separate_edge_channel,highpass_Hz,lowpass_Hz,minimum_ESR_codes_12bit,minimum_C_codes_12bit,worst_C_MAPE_percent,worst_ESR_MAPE_percent,blind_accuracy_pass_fraction,absolute_voltage_no_saturation,edge_no_saturation,result
-V1,wide_range_vT,Single 0-100 V absolute terminal-voltage channel,0,100,0,100,0,0,1200000,1.3080847735175,1.10579628009035,32.5478161046804,27.4355872765604,0.25,1,1,0
-V2,dual_range_Vabs_Vedge,0-80 V Vabs plus AC/level-shifted -2 to +2 V Vedge,0,80,-2,2,1,5000,1200000,32.7021193379374,1.38224535011294,56.2897530207374,1.51228622450819,0.277777777777778,1,1,0
-V3,level_shifted_precision_window,Single 30-75 V protected precision window,30,75,30,75,0,0,1200000,2.90685505226111,2.45732506686744,8.48859866954755,8.07495012709907,0.583333333333333,1,1,0
